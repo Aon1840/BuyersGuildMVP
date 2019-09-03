@@ -1,20 +1,17 @@
 package com.codemobiles.buyersguildmvp.adapter
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.codemobiles.buyersguildmvp.R
 import com.codemobiles.buyersguildmvp.model.MobileResponse
-import kotlinx.android.synthetic.main.mobile_list_item.view.ivImg
-import kotlinx.android.synthetic.main.mobile_list_item.view.tvName
-import kotlinx.android.synthetic.main.mobile_list_item.view.tvDescription
-import kotlinx.android.synthetic.main.mobile_list_item.view.tvPrice
-import kotlinx.android.synthetic.main.mobile_list_item.view.tvRating
-import kotlinx.android.synthetic.main.mobile_list_item.view.imgFav
+import kotlinx.android.synthetic.main.custom_mobile_list_item.view.txt_header
+import kotlinx.android.synthetic.main.custom_mobile_list_item.view.image_favorite
+import kotlinx.android.synthetic.main.custom_mobile_list_item.view.txt_description
+import kotlinx.android.synthetic.main.custom_mobile_list_item.view.image_mobile
+import kotlinx.android.synthetic.main.custom_mobile_list_item.view.txt_rating
+import kotlinx.android.synthetic.main.custom_mobile_list_item.view.txt_price
 
 class MobileListAdapter(private val setHolder: Int, private val mobileAdapterInterface: MobileAdapterInterface) :
     RecyclerView.Adapter<PhoneItemHolder>() {
@@ -24,7 +21,7 @@ class MobileListAdapter(private val setHolder: Int, private val mobileAdapterInt
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhoneItemHolder {
         return PhoneItemHolder(
             LayoutInflater.from(parent.context).inflate(
-                R.layout.mobile_list_item,
+                R.layout.custom_mobile_list_item,
                 parent,
                 false
             )
@@ -63,53 +60,51 @@ class MobileListAdapter(private val setHolder: Int, private val mobileAdapterInt
 
     fun setMobileListHoler(holder: PhoneItemHolder, position: Int) {
         var like: Boolean = mDataArray[position].fav
-        holder.tvName.text = mDataArray[position].name
-        holder.tvDescription.text = mDataArray[position].description
-        holder.tvPrice.text = mDataArray[position].price.toString()
-        holder.tvRating.text = mDataArray[position].rating.toString()
-        mobileAdapterInterface.setImage(holder.ivFav, mDataArray[position].thumbImageURL)
+        holder.name.text = mDataArray[position].name
+        holder.description.text = mDataArray[position].description
+        holder.price.text = "Price: ${mDataArray[position].price.toString()}"
+        holder.rate.text = "Rating: ${mDataArray[position].rating.toString()}"
+        mobileAdapterInterface.setImage(holder.img_mobile, mDataArray[position].thumbImageURL)
 
-//        if (like) {
-//            holder.favorite.setImageResource(R.drawable.ic_favorite)
-//        } else {
-//            holder.favorite.setImageResource(R.drawable.ic_heart)
-//        }
-//
-//        holder.favorite.setOnClickListener {
-//            //switch fav or not
-//            if (like) {
-//                holder.favorite.setImageResource(R.drawable.ic_heart)
-//                mDataArray[position].fav = false
-//                //write data here
-//                mobileAdapterInterface.removeFavMobile(mDataArray[position])
-//                like = false
-//            } else {
-//                holder.favorite.setImageResource(R.drawable.ic_favorite)
-//                mDataArray[position].fav = true
-//                //write data here
-//                mobileAdapterInterface.addFavMobile(mDataArray[position])
-//                like = true
-//            }
-//        }
+        if (like) {
+            holder.favorite.setImageResource(R.drawable.ic_favourite_press)
+        } else {
+            holder.favorite.setImageResource(R.drawable.ic_favourite)
+        }
+
+        holder.favorite.setOnClickListener {
+            //switch fav or not
+            if (like) {
+                holder.favorite.setImageResource(R.drawable.ic_favourite)
+                mDataArray[position].fav = false
+                mobileAdapterInterface.removeFavMobile(mDataArray[position])
+                like = false
+            } else {
+                holder.favorite.setImageResource(R.drawable.ic_favourite_press)
+                mDataArray[position].fav = true
+                mobileAdapterInterface.addFavMobile(mDataArray[position])
+                like = true
+            }
+        }
     }
 
     fun setFavoriteHolder(holder: PhoneItemHolder, position: Int) {
-        holder.tvName.text = mDataArray[position].name
-        holder.tvDescription.text = mDataArray[position].price.toString()
-        holder.tvPrice.text = mDataArray[position].rating.toString()
-        holder.tvPrice.alpha = 0.5f
-        mobileAdapterInterface.setImage(holder.ivImg, mDataArray[position].thumbImageURL)
-        holder.tvRating.visibility = View.GONE
-        holder.ivFav.visibility = View.GONE
+        holder.name.text = mDataArray[position].name
+        holder.description.text = "Price: ${mDataArray[position].price.toString()}"
+        holder.price.text = "Rating: ${mDataArray[position].rating.toString()}"
+        holder.price.alpha = 0.5f
+        mobileAdapterInterface.setImage(holder.img_mobile, mDataArray[position].thumbImageURL)
+        holder.rate.visibility = View.GONE
+        holder.favorite.visibility = View.GONE
     }
 
 }
 
 class PhoneItemHolder(view: View) : RecyclerView.ViewHolder(view) {
-    val ivImg: ImageView = view.ivImg
-    val tvName: TextView = view.tvName
-    val tvDescription: TextView = view.tvDescription
-    val tvPrice: TextView = view.tvPrice
-    val tvRating: TextView = view.tvRating
-    val ivFav: ImageButton = view.imgFav
+    val name = view.txt_header
+    val favorite = view.image_favorite
+    val description = view.txt_description
+    val img_mobile = view.image_mobile
+    val rate = view.txt_rating
+    val price = view.txt_price
 }

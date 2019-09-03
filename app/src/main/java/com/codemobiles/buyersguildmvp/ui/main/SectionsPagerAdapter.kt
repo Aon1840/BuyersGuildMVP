@@ -1,19 +1,66 @@
 package com.codemobiles.buyersguildmvp.ui.main
 
-import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.codemobiles.buyersguildmvp.R
+import com.codemobiles.buyersguildmvp.contract.BaseSortInterface
 import com.codemobiles.buyersguildmvp.fragment.FavouriteListFragment
 import com.codemobiles.buyersguildmvp.fragment.MobileListFragment
+import com.codemobiles.buyersguildmvp.model.MobileResponse
 
-private val TAB_TITLES = arrayOf(
-    R.string.tab_text_1,
-    R.string.tab_text_2
-)
 
-class SectionsPagerAdapter(private val context: Context, fm: FragmentManager) : FragmentPagerAdapter(fm) {
+class SectionsPagerAdapter(val fm: FragmentManager) : FragmentPagerAdapter(fm) {
+
+    fun updateSortType(sortType: String) {
+        val fragment = fm.fragments
+        fragment.forEach { fragment ->
+            if (fragment is BaseSortInterface) {
+                fragment.updateSortType(sortType)
+            }
+        }
+    }
+
+    fun getFavouriteMobile(): ArrayList<MobileResponse>? {
+        val fragment = fm.fragments
+        fragment.forEach { fragment ->
+            if (fragment is MobileListFragment) {
+                return fragment.getFavData()
+            }
+
+        }
+        return null
+    }
+
+    fun setFavouriteMobile() {
+        val favMobile = getFavouriteMobile()
+        val fragment = fm.fragments
+        fragment.forEach {fragment ->
+            if (fragment is FavouriteListFragment) {
+                fragment.sendDataFav(favMobile)
+            }
+        }
+    }
+
+    fun getUnFavouriteMobile(): ArrayList<MobileResponse>? {
+        val fragment = fm.fragments
+        fragment.forEach { fragment ->
+            if (fragment is FavouriteListFragment) {
+                return fragment.getUnFav()
+            }
+
+        }
+        return null
+    }
+
+    fun setUnFavouriteMobile() {
+        val unfavMobile = getUnFavouriteMobile()
+        val fragment = fm.fragments
+        fragment.forEach {fragment ->
+            if (fragment is MobileListFragment) {
+                fragment.checkUnFav(unfavMobile)
+            }
+        }
+    }
 
     override fun getItem(position: Int): Fragment {
         return when (position) {
@@ -27,11 +74,17 @@ class SectionsPagerAdapter(private val context: Context, fm: FragmentManager) : 
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
-        return context.resources.getString(TAB_TITLES[position])
+        return when (position) {
+            0 -> {
+                "Mobile List"
+            }
+            else -> {
+                return "Favorite"
+            }
+        }
     }
 
     override fun getCount(): Int {
-        // Show 2 total pages.
         return 2
     }
 }
