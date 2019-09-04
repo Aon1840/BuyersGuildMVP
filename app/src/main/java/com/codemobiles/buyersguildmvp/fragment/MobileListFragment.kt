@@ -7,24 +7,27 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.codemobiles.buyersguildmvp.adapter.MobileListAdapter
 import com.codemobiles.buyersguildmvp.contract.BaseSortInterface
 import com.codemobiles.buyersguildmvp.contract.MobileListView
 import com.codemobiles.buyersguildmvp.model.MobileResponse
 import com.codemobiles.buyersguildmvp.presenter.MobileListPresenter
+import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_recyclerview.*
+import javax.inject.Inject
 
-class MobileListFragment : Fragment(), MobileListView, BaseSortInterface {
+class MobileListFragment : DaggerFragment(), MobileListView, BaseSortInterface {
 
     private var mDataArray: ArrayList<MobileResponse> = arrayListOf()
     private var mAdapter: MobileListAdapter? = null
-    private var mPresenter: MobileListPresenter? = null
+
+    @Inject
+    lateinit var mPresenter: MobileListPresenter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(com.codemobiles.buyersguildmvp.R.layout.fragment_recyclerview, container, false)
-        mPresenter = MobileListPresenter()
+//        mPresenter = MobileListPresenter()
         mPresenter?.setView(this)
         return view
     }

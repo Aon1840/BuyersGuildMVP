@@ -8,10 +8,11 @@ import com.codemobiles.buyersguildmvp.PRICE_LOWTOHIGH
 import com.codemobiles.buyersguildmvp.RATE_5_1
 import com.codemobiles.buyersguildmvp.contract.FavouriteListView
 import com.codemobiles.buyersguildmvp.database.AppDatabase
+import com.codemobiles.buyersguildmvp.database.MobileDAO
 import com.codemobiles.buyersguildmvp.database.MobileEntity
 import com.codemobiles.buyersguildmvp.model.MobileResponse
 
-class MobileFavouriteListPresenter: BasePresenter<FavouriteListView>() {
+class MobileFavouriteListPresenter constructor(var favouriteMobileDAO: MobileDAO): BasePresenter<FavouriteListView>() {
 
     private var appDatabase: AppDatabase? = null
 
@@ -23,7 +24,7 @@ class MobileFavouriteListPresenter: BasePresenter<FavouriteListView>() {
 
     fun removeMobileFav(mobileListFav: ArrayList<MobileResponse>, position: Int) {
         val mobile = mobileListFav[position]
-        appDatabase?.favoriteDao()?.deleteFavorite(
+        favouriteMobileDAO?.deleteFavorite(
             MobileEntity(
                 mobile.id,
                 mobile.name,

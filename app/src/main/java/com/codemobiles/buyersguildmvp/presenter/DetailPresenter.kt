@@ -1,6 +1,6 @@
 package com.codemobiles.buyersguildmvp.presenter
 
-import com.codemobiles.buyersguildmvp.api.ApiManager
+import com.codemobiles.buyersguildmvp.api.ApiInterface
 import com.codemobiles.buyersguildmvp.contract.DetailVIew
 import com.codemobiles.buyersguildmvp.model.MobileResponse
 import com.codemobiles.buyersguildmvp.model.PhotoListResponse
@@ -8,7 +8,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class DetailPresenter: BasePresenter<DetailVIew>() {
+class DetailPresenter constructor(var apiManager: ApiInterface): BasePresenter<DetailVIew>() {
 
     fun getPassData(mobile: MobileResponse) {
         mView?.setName(mobile.name)
@@ -19,7 +19,7 @@ class DetailPresenter: BasePresenter<DetailVIew>() {
     }
 
     fun feedImageDetail(id: Int) {
-        val call = ApiManager.getPhoneList().getImageList(id)
+        val call = apiManager.getImageList(id)
         call.enqueue(object : Callback<List<PhotoListResponse>> {
             override fun onFailure(call: Call<List<PhotoListResponse>>, t: Throwable) {
             }

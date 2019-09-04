@@ -10,9 +10,10 @@ import com.codemobiles.buyersguildmvp.PRICE_HIGHTOLOW
 import com.codemobiles.buyersguildmvp.PRICE_LOWTOHIGH
 import com.codemobiles.buyersguildmvp.RATE_5_1
 import com.codemobiles.buyersguildmvp.activity.DetailActivity
-import com.codemobiles.buyersguildmvp.api.ApiManager
+import com.codemobiles.buyersguildmvp.api.ApiInterface
 import com.codemobiles.buyersguildmvp.contract.MobileListView
 import com.codemobiles.buyersguildmvp.database.AppDatabase
+import com.codemobiles.buyersguildmvp.database.MobileDAO
 import com.codemobiles.buyersguildmvp.database.MobileEntity
 import com.codemobiles.buyersguildmvp.model.MobileResponse
 import com.google.gson.Gson
@@ -21,13 +22,13 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MobileListPresenter: BasePresenter<MobileListView>() {
+class MobileListPresenter constructor(var apiManager: ApiInterface, var favouriteMobileDAO: MobileDAO): BasePresenter<MobileListView>() {
 
     private var mDataArray: ArrayList<MobileResponse> = arrayListOf()
     private var mDatabase: AppDatabase? = null
 
     fun feedMobileList() {
-        val call = ApiManager.getPhoneList().getPhones()
+        val call = apiManager.getPhones()
 
         call.enqueue(object : Callback<List<MobileResponse>> {
             override fun onFailure(call: Call<List<MobileResponse>>, t: Throwable) {
@@ -38,6 +39,7 @@ class MobileListPresenter: BasePresenter<MobileListView>() {
                 if (response.isSuccessful) {
                     var mDataArray: ArrayList<MobileResponse> = arrayListOf()
                     mDataArray.addAll(response.body()!!)
+                    Log.d("MobilePresenter: ","----- mDataArray: "+mDataArray)
                     mView?.showMobileList(mDataArray)
                     mView?.setPreFavourite()
                 }
@@ -90,7 +92,8 @@ class MobileListPresenter: BasePresenter<MobileListView>() {
     }
 
     fun addFavoriteMobile(mobile: MobileResponse) {
-        mDatabase?.favoriteDao()?.addFavorite(
+
+        favouriteMobileDAO?.addFavorite(
             MobileEntity(
                 mobile.id,
                 mobile.name,
@@ -106,7 +109,7 @@ class MobileListPresenter: BasePresenter<MobileListView>() {
     }
 
     fun removeFavoriteMobile(mobile: MobileResponse) {
-        mDatabase?.favoriteDao()?.deleteFavorite(
+        favouriteMobileDAO?.deleteFavorite(
             MobileEntity(
                 mobile.id,
                 mobile.name,
@@ -133,7 +136,7 @@ class MobileListPresenter: BasePresenter<MobileListView>() {
     }
 
     fun checkFavourite() {
-        val result = mDatabase?.favoriteDao()?.queryFavorites()
+        val result = favouriteMobileDAO?.queryFavorites()
         val gson = Gson()
         val json = gson.toJson(result)
         val data = gson.fromJson<List<MobileResponse>>(json, object : TypeToken<List<MobileResponse>>() {}.type)

@@ -1,8 +1,6 @@
 package com.codemobiles.buyersguildmvp.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.codemobiles.buyersguildmvp.INFORMATION
 import com.codemobiles.buyersguildmvp.R
@@ -11,6 +9,7 @@ import com.codemobiles.buyersguildmvp.contract.DetailVIew
 import com.codemobiles.buyersguildmvp.model.MobileResponse
 import com.codemobiles.buyersguildmvp.model.PhotoListResponse
 import com.codemobiles.buyersguildmvp.presenter.DetailPresenter
+import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_mobile_detail.txt_detailName
 import kotlinx.android.synthetic.main.activity_mobile_detail.txt_detailBrand
 import kotlinx.android.synthetic.main.activity_mobile_detail.txt_detailPrice
@@ -18,12 +17,15 @@ import kotlinx.android.synthetic.main.activity_mobile_detail.txt_detailDescripti
 import kotlinx.android.synthetic.main.activity_mobile_detail.txt_detailRating
 import kotlinx.android.synthetic.main.activity_mobile_detail.detail_rcv
 import kotlinx.android.synthetic.main.activity_mobile_detail.detail_toolbar
+import javax.inject.Inject
 
-class DetailActivity : AppCompatActivity(), DetailVIew {
+class DetailActivity : DaggerAppCompatActivity(), DetailVIew {
 
     private var mData: MobileResponse? = null
     private var mAdapter: PhotoListAdapter? = null
-    private var mPresenter: DetailPresenter? = null
+
+    @Inject
+    lateinit var mPresenter: DetailPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,7 +58,7 @@ class DetailActivity : AppCompatActivity(), DetailVIew {
     }
 
     private fun setupData() {
-        mPresenter = DetailPresenter()
+//        mPresenter = DetailPresenter()
         mPresenter?.setView(this)
         mAdapter = PhotoListAdapter()
 

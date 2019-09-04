@@ -6,31 +6,33 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
 import com.codemobiles.buyersguildmvp.adapter.MobileListAdapter
 import com.codemobiles.buyersguildmvp.contract.BaseSortInterface
 import com.codemobiles.buyersguildmvp.contract.FavouriteListView
 import com.codemobiles.buyersguildmvp.model.MobileResponse
 import com.codemobiles.buyersguildmvp.presenter.MobileFavouriteListPresenter
+import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_recyclerview.view.*
+import javax.inject.Inject
 
 
-class FavouriteListFragment : Fragment(), FavouriteListView, BaseSortInterface {
+class FavouriteListFragment : DaggerFragment(), FavouriteListView, BaseSortInterface {
 
     private var mAdapter: MobileListAdapter? = null
     private var mDataArrayFavourite: ArrayList<MobileResponse> = arrayListOf()
-    private var mPresenter: MobileFavouriteListPresenter? = null
+
+    @Inject
+    lateinit var mPresenter: MobileFavouriteListPresenter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(com.codemobiles.buyersguildmvp.R.layout.fragment_recyclerview, container, false)
-        mPresenter = MobileFavouriteListPresenter()
+//        mPresenter = MobileFavouriteListPresenter()
         mPresenter?.setView(this)
 
         return view
