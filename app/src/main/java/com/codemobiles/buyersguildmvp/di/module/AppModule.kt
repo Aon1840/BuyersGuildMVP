@@ -35,6 +35,7 @@ class AppModule{
             .setDateFormat("yyyy-MM-dd HH:mm:ssZ")
             .create()
     }
+
     @Provides
     @Singleton
     fun provideOkHttpClient(): OkHttpClient {

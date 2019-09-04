@@ -9,7 +9,7 @@
     <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#90CAF9"
+            android:background="@color/colorPrimary"
             android:minHeight="?attr/actionBarSize"
             app:title="MobilePhone"
             app:titleTextColor="@color/colorWhite"

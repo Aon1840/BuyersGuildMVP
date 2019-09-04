@@ -1,10 +1,15 @@
 package com.codemobiles.buyersguildmvp.adapter
+
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.codemobiles.buyersguildmvp.INFORMATION
 import com.codemobiles.buyersguildmvp.R
+import com.codemobiles.buyersguildmvp.activity.DetailActivity
 import com.codemobiles.buyersguildmvp.model.MobileResponse
 import kotlinx.android.synthetic.main.custom_mobile_list_item.view.txt_header
 import kotlinx.android.synthetic.main.custom_mobile_list_item.view.image_favorite
@@ -41,14 +46,14 @@ class MobileListAdapter(private val setHolder: Int, private val mobileAdapterInt
         holder.itemView.setOnClickListener {
             val adapterPos = holder.adapterPosition
             if (adapterPos != RecyclerView.NO_POSITION) {
-                mobileAdapterInterface.getDetail(mDataArray[position])
+                val intent = Intent(it.context, DetailActivity::class.java)
+                intent.putExtra(INFORMATION, mDataArray[position])
+                it.context.startActivity(intent)
             }
         }
     }
 
     interface MobileAdapterInterface {
-        fun getDetail(infomation: MobileResponse)
-        fun setImage(imageTarget: ImageView, imageURL: String)
         fun addFavMobile(target: MobileResponse)
         fun removeFavMobile(target: MobileResponse)
     }
@@ -64,7 +69,10 @@ class MobileListAdapter(private val setHolder: Int, private val mobileAdapterInt
         holder.description.text = mDataArray[position].description
         holder.price.text = "Price: ${mDataArray[position].price.toString()}"
         holder.rate.text = "Rating: ${mDataArray[position].rating.toString()}"
-        mobileAdapterInterface.setImage(holder.img_mobile, mDataArray[position].thumbImageURL)
+
+        Glide.with(holder.itemView.context)
+            .load(mDataArray[position].thumbImageURL)
+            .into(holder.img_mobile)
 
         if (like) {
             holder.favorite.setImageResource(R.drawable.ic_favourite_press)
@@ -73,7 +81,6 @@ class MobileListAdapter(private val setHolder: Int, private val mobileAdapterInt
         }
 
         holder.favorite.setOnClickListener {
-            //switch fav or not
             if (like) {
                 holder.favorite.setImageResource(R.drawable.ic_favourite)
                 mDataArray[position].fav = false
@@ -93,7 +100,10 @@ class MobileListAdapter(private val setHolder: Int, private val mobileAdapterInt
         holder.description.text = "Price: ${mDataArray[position].price.toString()}"
         holder.price.text = "Rating: ${mDataArray[position].rating.toString()}"
         holder.price.alpha = 0.5f
-        mobileAdapterInterface.setImage(holder.img_mobile, mDataArray[position].thumbImageURL)
+        Glide.with(holder.itemView.context)
+            .load(mDataArray[position].thumbImageURL)
+            .into(holder.img_mobile)
+
         holder.rate.visibility = View.GONE
         holder.favorite.visibility = View.GONE
     }

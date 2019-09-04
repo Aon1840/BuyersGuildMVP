@@ -1,26 +1,14 @@
 package com.codemobiles.buyersguildmvp.presenter
 
-import android.content.Context
-import android.widget.ImageView
-import com.bumptech.glide.Glide
 import com.codemobiles.buyersguildmvp.PRICE_HIGHTOLOW
 import com.codemobiles.buyersguildmvp.PRICE_LOWTOHIGH
 import com.codemobiles.buyersguildmvp.RATE_5_1
 import com.codemobiles.buyersguildmvp.contract.FavouriteListView
-import com.codemobiles.buyersguildmvp.database.AppDatabase
 import com.codemobiles.buyersguildmvp.database.MobileDAO
 import com.codemobiles.buyersguildmvp.database.MobileEntity
 import com.codemobiles.buyersguildmvp.model.MobileResponse
 
-class MobileFavouriteListPresenter constructor(var favouriteMobileDAO: MobileDAO): BasePresenter<FavouriteListView>() {
-
-    private var appDatabase: AppDatabase? = null
-
-    fun initDatabase(context: Context) {
-        appDatabase = AppDatabase.getInstance(context).also {appDatabase ->
-            appDatabase.openHelper.readableDatabase
-        }
-    }
+class MobileFavouriteListPresenter constructor(var favouriteMobileDAO: MobileDAO) : BasePresenter<FavouriteListView>() {
 
     fun removeMobileFav(mobileListFav: ArrayList<MobileResponse>, position: Int) {
         val mobile = mobileListFav[position]
@@ -62,12 +50,6 @@ class MobileFavouriteListPresenter constructor(var favouriteMobileDAO: MobileDAO
         if (list != null) {
             mView?.showMobileFav(list)
         }
-    }
-
-    fun setImageTarget(context: Context, img: ImageView, url: String) {
-        Glide.with(context)
-            .load(url)
-            .into(img)
     }
 
 }

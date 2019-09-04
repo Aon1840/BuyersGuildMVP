@@ -9,6 +9,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.codemobiles.buyersguildmvp.R
 import com.codemobiles.buyersguildmvp.adapter.MobileListAdapter
 import com.codemobiles.buyersguildmvp.contract.BaseSortInterface
 import com.codemobiles.buyersguildmvp.contract.FavouriteListView
@@ -31,8 +32,7 @@ class FavouriteListFragment : DaggerFragment(), FavouriteListView, BaseSortInter
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(com.codemobiles.buyersguildmvp.R.layout.fragment_recyclerview, container, false)
-//        mPresenter = MobileFavouriteListPresenter()
+        val view = inflater.inflate(R.layout.fragment_recyclerview, container, false)
         mPresenter?.setView(this)
 
         return view
@@ -41,7 +41,6 @@ class FavouriteListFragment : DaggerFragment(), FavouriteListView, BaseSortInter
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init(view)
-        mPresenter?.initDatabase(context!!)
     }
 
     override fun updateSortType(sortType: String) {
@@ -79,15 +78,11 @@ class FavouriteListFragment : DaggerFragment(), FavouriteListView, BaseSortInter
 
     fun setFavAdapter(view: View) {
         mAdapter = MobileListAdapter(1, object : MobileListAdapter.MobileAdapterInterface {
-            override fun getDetail(infomation: MobileResponse) {}
 
             override fun addFavMobile(target: MobileResponse) {}
 
             override fun removeFavMobile(target: MobileResponse) {}
 
-            override fun setImage(imageTarget: ImageView, imageURL: String) {
-                mPresenter?.setImageTarget(view.context, imageTarget, imageURL)
-            }
         })
     }
 

@@ -1,18 +1,11 @@
 package com.codemobiles.buyersguildmvp.presenter
 
-import android.content.Context
-import android.content.Intent
 import android.util.Log
-import android.widget.ImageView
-import com.bumptech.glide.Glide
-import com.codemobiles.buyersguildmvp.INFORMATION
 import com.codemobiles.buyersguildmvp.PRICE_HIGHTOLOW
 import com.codemobiles.buyersguildmvp.PRICE_LOWTOHIGH
 import com.codemobiles.buyersguildmvp.RATE_5_1
-import com.codemobiles.buyersguildmvp.activity.DetailActivity
 import com.codemobiles.buyersguildmvp.api.ApiInterface
 import com.codemobiles.buyersguildmvp.contract.MobileListView
-import com.codemobiles.buyersguildmvp.database.AppDatabase
 import com.codemobiles.buyersguildmvp.database.MobileDAO
 import com.codemobiles.buyersguildmvp.database.MobileEntity
 import com.codemobiles.buyersguildmvp.model.MobileResponse
@@ -25,7 +18,6 @@ import retrofit2.Response
 class MobileListPresenter constructor(var apiManager: ApiInterface, var favouriteMobileDAO: MobileDAO): BasePresenter<MobileListView>() {
 
     private var mDataArray: ArrayList<MobileResponse> = arrayListOf()
-    private var mDatabase: AppDatabase? = null
 
     fun feedMobileList() {
         val call = apiManager.getPhones()
@@ -39,7 +31,6 @@ class MobileListPresenter constructor(var apiManager: ApiInterface, var favourit
                 if (response.isSuccessful) {
                     var mDataArray: ArrayList<MobileResponse> = arrayListOf()
                     mDataArray.addAll(response.body()!!)
-                    Log.d("MobilePresenter: ","----- mDataArray: "+mDataArray)
                     mView?.showMobileList(mDataArray)
                     mView?.setPreFavourite()
                 }
@@ -65,18 +56,6 @@ class MobileListPresenter constructor(var apiManager: ApiInterface, var favourit
         }
 
         mView?.showMobileList(mobileList)
-    }
-
-    fun getDetail(context: Context, mobile: MobileResponse) {
-        val intent = Intent(context, DetailActivity::class.java)
-        intent.putExtra(INFORMATION, mobile)
-        context.startActivity(intent)
-    }
-
-    fun setImage(context: Context, target: ImageView, url: String) {
-        Glide.with(context)
-            .load(url)
-            .into(target)
     }
 
     fun getCurrentFav(mobileList: ArrayList<MobileResponse>, mobileFavList: ArrayList<MobileResponse>?) {
@@ -129,18 +108,12 @@ class MobileListPresenter constructor(var apiManager: ApiInterface, var favourit
         return mDataArray
     }
 
-    fun setupDatabase(context: Context) {
-        mDatabase = AppDatabase.getInstance(context).also {
-            it.openHelper.readableDatabase
-        }
-    }
 
     fun checkFavourite() {
         val result = favouriteMobileDAO?.queryFavorites()
         val gson = Gson()
         val json = gson.toJson(result)
         val data = gson.fromJson<List<MobileResponse>>(json, object : TypeToken<List<MobileResponse>>() {}.type)
-        println("Add!!")
         mDataArray.addAll(data)
     }
 }

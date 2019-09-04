@@ -10,7 +10,7 @@
     <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#90CAF9"
+            android:background="@color/colorPrimary"
             android:minHeight="?attr/actionBarSize"
             app:title="MobileName"
             app:titleTextColor="@color/colorWhite"
@@ -22,7 +22,7 @@
                     android:layout_toLeftOf="@+id/image_filter"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="MobilePhone"
+                    android:text="@string/app_name"
                     android:textColor="@color/colorWhite"
                     android:textSize="20sp"
                     />
@@ -39,7 +39,7 @@
 
     <com.google.android.material.tabs.TabLayout
             android:id="@+id/main_tab"
-            android:background="#90CAF9"
+            android:background="@color/colorPrimary"
             app:tabTextColor="@color/colorWhite"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -47,12 +47,12 @@
         <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="MOBILE LIST"/>
+                android:text="@string/tab1"/>
 
         <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="FAVORITE LIST"/>
+                android:text="@string/tab2"/>
 
     </com.google.android.material.tabs.TabLayout>
     <androidx.viewpager.widget.ViewPager

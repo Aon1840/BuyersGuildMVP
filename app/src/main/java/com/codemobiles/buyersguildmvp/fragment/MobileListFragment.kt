@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.codemobiles.buyersguildmvp.adapter.MobileListAdapter
 import com.codemobiles.buyersguildmvp.contract.BaseSortInterface
@@ -14,7 +13,7 @@ import com.codemobiles.buyersguildmvp.contract.MobileListView
 import com.codemobiles.buyersguildmvp.model.MobileResponse
 import com.codemobiles.buyersguildmvp.presenter.MobileListPresenter
 import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.fragment_recyclerview.*
+import kotlinx.android.synthetic.main.fragment_recyclerview.rcv_frgment
 import javax.inject.Inject
 
 class MobileListFragment : DaggerFragment(), MobileListView, BaseSortInterface {
@@ -27,7 +26,6 @@ class MobileListFragment : DaggerFragment(), MobileListView, BaseSortInterface {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(com.codemobiles.buyersguildmvp.R.layout.fragment_recyclerview, container, false)
-//        mPresenter = MobileListPresenter()
         mPresenter?.setView(this)
         return view
     }
@@ -39,7 +37,6 @@ class MobileListFragment : DaggerFragment(), MobileListView, BaseSortInterface {
 
     private fun init(view: View) {
         setMobileAdapter(view)
-        mPresenter?.setupDatabase(view.context)
         mDataArray.clear()
         mPresenter?.feedMobileList()
         mPresenter?.checkFavourite()
@@ -65,13 +62,6 @@ class MobileListFragment : DaggerFragment(), MobileListView, BaseSortInterface {
 
     fun setMobileAdapter(view: View) {
         mAdapter = MobileListAdapter(0, object : MobileListAdapter.MobileAdapterInterface {
-            override fun getDetail(mobile: MobileResponse) {
-                mPresenter?.getDetail(view.context, mobile)
-            }
-
-            override fun setImage(imageTarget: ImageView, imageURL: String) {
-                mPresenter?.setImage(view.context, imageTarget, imageURL)
-            }
 
             override fun addFavMobile(mobile: MobileResponse) {
                 mPresenter?.addFavoriteMobile(mobile)
