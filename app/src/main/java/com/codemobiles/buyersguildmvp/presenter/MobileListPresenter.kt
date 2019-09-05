@@ -1,6 +1,5 @@
 package com.codemobiles.buyersguildmvp.presenter
 
-import android.util.Log
 import com.codemobiles.buyersguildmvp.PRICE_HIGHTOLOW
 import com.codemobiles.buyersguildmvp.PRICE_LOWTOHIGH
 import com.codemobiles.buyersguildmvp.RATE_5_1
@@ -11,32 +10,37 @@ import com.codemobiles.buyersguildmvp.database.MobileEntity
 import com.codemobiles.buyersguildmvp.model.MobileResponse
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import io.reactivex.Observer
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 
-class MobileListPresenter constructor(var apiManager: ApiInterface, var favouriteMobileDAO: MobileDAO): BasePresenter<MobileListView>() {
+class MobileListPresenter constructor(var apiManager: ApiInterface, var favouriteMobileDAO: MobileDAO) :
+    BasePresenter<MobileListView>() {
 
     private var mDataArray: ArrayList<MobileResponse> = arrayListOf()
 
     fun feedMobileList() {
-        val call = apiManager.getPhones()
+        apiManager.getPhones().subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : Observer<List<MobileResponse>> {
+                override fun onComplete() {
+                }
 
-        call.enqueue(object : Callback<List<MobileResponse>> {
-            override fun onFailure(call: Call<List<MobileResponse>>, t: Throwable) {
-                Log.d("MobileListFragmentPres", "Fail")
-            }
+                override fun onSubscribe(d: Disposable) {
+                }
 
-            override fun onResponse(call: Call<List<MobileResponse>>, response: Response<List<MobileResponse>>) {
-                if (response.isSuccessful) {
+                override fun onNext(mobileResponse: List<MobileResponse>) {
                     var mDataArray: ArrayList<MobileResponse> = arrayListOf()
-                    mDataArray.addAll(response.body()!!)
+                    mDataArray.addAll(mobileResponse)
                     mView?.showMobileList(mDataArray)
                     mView?.setPreFavourite()
                 }
-            }
 
-        })
+                override fun onError(e: Throwable) {
+                    e.printStackTrace()
+                }
+            })
     }
 
     fun sortMobile(mobileList: ArrayList<MobileResponse>, sortForm: String) {
@@ -51,7 +55,7 @@ class MobileListPresenter constructor(var apiManager: ApiInterface, var favourit
                 mobileList.sortByDescending { item -> item.rating }
             }
             else -> {
-                mobileList.sortBy {item -> item.price }
+                mobileList.sortBy { item -> item.price }
             }
         }
 
@@ -59,7 +63,7 @@ class MobileListPresenter constructor(var apiManager: ApiInterface, var favourit
     }
 
     fun getCurrentFav(mobileList: ArrayList<MobileResponse>, mobileFavList: ArrayList<MobileResponse>?) {
-        mobileList.forEach {item ->
+        mobileList.forEach { item ->
             item.fav = false
             mobileFavList?.forEach { itemFav ->
                 if (item.id == itemFav.id) {
