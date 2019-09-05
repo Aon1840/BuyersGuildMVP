@@ -2,7 +2,6 @@ package com.codemobiles.buyersguildmvp.fragment
 
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,7 +25,7 @@ class MobileListFragment : DaggerFragment(), MobileListView, BaseSortInterface {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(com.codemobiles.buyersguildmvp.R.layout.fragment_recyclerview, container, false)
-        mPresenter?.setView(this)
+        mPresenter.setView(this)
         return view
     }
 
@@ -36,10 +35,10 @@ class MobileListFragment : DaggerFragment(), MobileListView, BaseSortInterface {
     }
 
     private fun init(view: View) {
-        setMobileAdapter(view)
+        setMobileAdapter()
         mDataArray.clear()
-        mPresenter?.feedMobileList()
-        mPresenter?.checkFavourite()
+        mPresenter.feedMobileList()
+        mPresenter.checkFavourite()
         rcv_frgment.let { recyclerView ->
             recyclerView.adapter = mAdapter
             recyclerView.layoutManager = LinearLayoutManager(view.context)
@@ -48,38 +47,37 @@ class MobileListFragment : DaggerFragment(), MobileListView, BaseSortInterface {
 
     override fun showMobileList(phoneList: ArrayList<MobileResponse>) {
         mDataArray = phoneList
-        Log.d("MobileList","=== mDataArray: "+phoneList)
         mAdapter?.submitList(mDataArray)
     }
 
     override fun setPreFavourite() {
-        mPresenter?.getCurrentFav(mDataArray, mPresenter?.getFavouriteMobile())
+        mPresenter.getCurrentFav(mDataArray, mPresenter.getFavouriteMobile())
     }
 
     override fun updateSortType(sortType: String) {
-        mPresenter?.sortMobile(mDataArray, sortType)
+        mPresenter.sortMobile(mDataArray, sortType)
     }
 
-    fun setMobileAdapter(view: View) {
+    private fun setMobileAdapter() {
         mAdapter = MobileListAdapter(0, object : MobileListAdapter.MobileAdapterInterface {
 
             override fun addFavMobile(mobile: MobileResponse) {
-                mPresenter?.addFavoriteMobile(mobile)
+                mPresenter.addFavoriteMobile(mobile)
             }
 
             override fun removeFavMobile(mobile: MobileResponse) {
-                mPresenter?.removeFavoriteMobile(mobile)
+                mPresenter.removeFavoriteMobile(mobile)
             }
 
         })
     }
 
     fun getFavData(): ArrayList<MobileResponse>? {
-        return mPresenter?.getFavouriteMobile()
+        return mPresenter.getFavouriteMobile()
     }
 
     fun checkUnFav(list: ArrayList<MobileResponse>?) {
-        mPresenter?.getCurrentFav(mDataArray, list)
+        mPresenter.getCurrentFav(mDataArray, list)
     }
 
 }

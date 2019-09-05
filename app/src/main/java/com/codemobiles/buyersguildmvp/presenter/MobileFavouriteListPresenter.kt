@@ -12,7 +12,7 @@ class MobileFavouriteListPresenter constructor(var favouriteMobileDAO: MobileDAO
 
     fun removeMobileFav(mobileListFav: ArrayList<MobileResponse>, position: Int) {
         val mobile = mobileListFav[position]
-        favouriteMobileDAO?.deleteFavorite(
+        favouriteMobileDAO.deleteFavorite(
             MobileEntity(
                 mobile.id,
                 mobile.name,

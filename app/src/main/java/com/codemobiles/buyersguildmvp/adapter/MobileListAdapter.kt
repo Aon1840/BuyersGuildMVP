@@ -4,7 +4,6 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.codemobiles.buyersguildmvp.INFORMATION
@@ -54,8 +53,8 @@ class MobileListAdapter(private val setHolder: Int, private val mobileAdapterInt
     }
 
     interface MobileAdapterInterface {
-        fun addFavMobile(target: MobileResponse)
-        fun removeFavMobile(target: MobileResponse)
+        fun addFavMobile(mobile: MobileResponse)
+        fun removeFavMobile(mobile: MobileResponse)
     }
 
     fun submitList(list: ArrayList<MobileResponse>) {

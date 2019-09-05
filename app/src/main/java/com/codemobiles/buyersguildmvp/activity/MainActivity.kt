@@ -7,8 +7,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.codemobiles.buyersguildmvp.LIST_SORT
 import com.codemobiles.buyersguildmvp.R
-import com.codemobiles.buyersguildmvp.ui.main.SectionsPagerAdapter
-import kotlinx.android.synthetic.main.activity_main.*
+import com.codemobiles.buyersguildmvp.adapter.SectionsPagerAdapter
+import kotlinx.android.synthetic.main.activity_main.main_viewPager
+import kotlinx.android.synthetic.main.activity_main.main_tab
+import kotlinx.android.synthetic.main.activity_main.image_filter
 
 class MainActivity : AppCompatActivity() {
 

@@ -1,15 +1,17 @@
-package com.codemobiles.buyersguildmvp.ui.main
+package com.codemobiles.buyersguildmvp.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import com.codemobiles.buyersguildmvp.FAVOURITE
+import com.codemobiles.buyersguildmvp.MOBILE_LIST
 import com.codemobiles.buyersguildmvp.contract.BaseSortInterface
 import com.codemobiles.buyersguildmvp.fragment.FavouriteListFragment
 import com.codemobiles.buyersguildmvp.fragment.MobileListFragment
 import com.codemobiles.buyersguildmvp.model.MobileResponse
 
 
-class SectionsPagerAdapter(val fm: FragmentManager) : FragmentPagerAdapter(fm) {
+class SectionsPagerAdapter(private val fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
     fun updateSortType(sortType: String) {
         val fragment = fm.fragments
@@ -76,10 +78,10 @@ class SectionsPagerAdapter(val fm: FragmentManager) : FragmentPagerAdapter(fm) {
     override fun getPageTitle(position: Int): CharSequence? {
         return when (position) {
             0 -> {
-                "Mobile List"
+                MOBILE_LIST
             }
             else -> {
-                return "Favorite"
+                return FAVOURITE
             }
         }
     }

@@ -72,7 +72,7 @@ class MobileListPresenter constructor(var apiManager: ApiInterface, var favourit
 
     fun addFavoriteMobile(mobile: MobileResponse) {
 
-        favouriteMobileDAO?.addFavorite(
+        favouriteMobileDAO.addFavorite(
             MobileEntity(
                 mobile.id,
                 mobile.name,
@@ -88,7 +88,7 @@ class MobileListPresenter constructor(var apiManager: ApiInterface, var favourit
     }
 
     fun removeFavoriteMobile(mobile: MobileResponse) {
-        favouriteMobileDAO?.deleteFavorite(
+        favouriteMobileDAO.deleteFavorite(
             MobileEntity(
                 mobile.id,
                 mobile.name,
@@ -110,7 +110,7 @@ class MobileListPresenter constructor(var apiManager: ApiInterface, var favourit
 
 
     fun checkFavourite() {
-        val result = favouriteMobileDAO?.queryFavorites()
+        val result = favouriteMobileDAO.queryFavorites()
         val gson = Gson()
         val json = gson.toJson(result)
         val data = gson.fromJson<List<MobileResponse>>(json, object : TypeToken<List<MobileResponse>>() {}.type)

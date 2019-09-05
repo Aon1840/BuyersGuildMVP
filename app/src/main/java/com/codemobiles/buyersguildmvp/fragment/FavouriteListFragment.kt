@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,7 +15,7 @@ import com.codemobiles.buyersguildmvp.contract.FavouriteListView
 import com.codemobiles.buyersguildmvp.model.MobileResponse
 import com.codemobiles.buyersguildmvp.presenter.MobileFavouriteListPresenter
 import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.fragment_recyclerview.view.*
+import kotlinx.android.synthetic.main.fragment_recyclerview.view.rcv_frgment
 import javax.inject.Inject
 
 
@@ -33,7 +32,7 @@ class FavouriteListFragment : DaggerFragment(), FavouriteListView, BaseSortInter
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_recyclerview, container, false)
-        mPresenter?.setView(this)
+        mPresenter.setView(this)
 
         return view
     }
@@ -44,7 +43,7 @@ class FavouriteListFragment : DaggerFragment(), FavouriteListView, BaseSortInter
     }
 
     override fun updateSortType(sortType: String) {
-        mPresenter?.sortMobile(mDataArrayFavourite, sortType)
+        mPresenter.sortMobile(mDataArrayFavourite, sortType)
     }
 
     override fun showMobileFav(mobileFav: ArrayList<MobileResponse>) {
@@ -72,11 +71,11 @@ class FavouriteListFragment : DaggerFragment(), FavouriteListView, BaseSortInter
 
         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, swipeDir: Int) {
             val position = viewHolder.adapterPosition
-            mPresenter?.removeMobileFav(mDataArrayFavourite, position)
+            mPresenter.removeMobileFav(mDataArrayFavourite, position)
         }
     }
 
-    fun setFavAdapter(view: View) {
+    private fun setFavAdapter() {
         mAdapter = MobileListAdapter(1, object : MobileListAdapter.MobileAdapterInterface {
 
             override fun addFavMobile(target: MobileResponse) {}
@@ -87,17 +86,17 @@ class FavouriteListFragment : DaggerFragment(), FavouriteListView, BaseSortInter
     }
 
     fun init(view: View) {
-        setFavAdapter(view)
+        setFavAdapter()
         view.rcv_frgment.let { recyclerView ->
             recyclerView.adapter = mAdapter
             recyclerView.layoutManager = LinearLayoutManager(context)
-            val itemTouchHelper: ItemTouchHelper = ItemTouchHelper(simpleItemTouchCallback)
+            val itemTouchHelper = ItemTouchHelper(simpleItemTouchCallback)
             itemTouchHelper.attachToRecyclerView(recyclerView)
         }
     }
 
     fun sendDataFav(list: ArrayList<MobileResponse>?) {
-        mPresenter?.setMobileFav(list)
+        mPresenter.setMobileFav(list)
     }
 
     fun getUnFav(): ArrayList<MobileResponse> {

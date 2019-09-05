@@ -58,16 +58,15 @@ class DetailActivity : DaggerAppCompatActivity(), DetailVIew {
     }
 
     private fun setupData() {
-//        mPresenter = DetailPresenter()
-        mPresenter?.setView(this)
+        mPresenter.setView(this)
         mAdapter = PhotoListAdapter()
 
         detail_rcv.setAdapter(mAdapter)
         detail_rcv.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
         mData = intent.extras?.getSerializable(INFORMATION) as MobileResponse
-        mPresenter?.getPassData(mData!!)
-        mPresenter?.feedImageDetail(mData!!.id)
+        mPresenter.getPassData(mData!!)
+        mPresenter.feedImageDetail(mData!!.id)
         detail_toolbar.setNavigationOnClickListener {
             finish()
         }
