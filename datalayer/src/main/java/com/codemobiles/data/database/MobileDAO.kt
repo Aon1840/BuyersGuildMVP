@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Insert
 import androidx.room.Delete
+import com.codemobiles.data.model.db.MobileEntity
 
 @Dao
 interface MobileDAO {

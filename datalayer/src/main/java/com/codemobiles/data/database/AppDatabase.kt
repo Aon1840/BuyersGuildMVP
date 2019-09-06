@@ -6,7 +6,8 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.codemobiles.buyersguildmvp.DATABASE_NAME
+import com.codemobiles.data.DATABASE_NAME
+import com.codemobiles.data.model.db.MobileEntity
 
 @Database(entities = [MobileEntity::class], version = 1, exportSchema = true)
 abstract class AppDatabase : RoomDatabase() {
