@@ -1,11 +1,21 @@
 package com.codemobiles.buyersguildmvp.di.module
 
 import android.app.Application
-import com.codemobiles.buyersguildmvp.api.ApiInterface
 import com.codemobiles.buyersguildmvp.application.MyApplication
 import com.codemobiles.buyersguildmvp.database.AppDatabase
 import com.codemobiles.buyersguildmvp.database.MobileDAO
 import com.codemobiles.buyersguildmvp.model.MobileResponse
+import com.codemobiles.data.dataRepository.MobileDataRepository
+import com.codemobiles.data.dataRepository.PhotoDataRepository
+import com.codemobiles.data.mapper.MobileEntityDataMapper
+import com.codemobiles.data.mapper.PhotoMapper
+import com.codemobiles.data.network.ApiInterface
+import com.codemobiles.domain.repository.MobileRepository
+import com.codemobiles.domain.repository.PhotoRepository
+import com.codemobiles.domain.usecase.favorite.AddFavouriteUseCase
+import com.codemobiles.domain.usecase.favorite.RemoveFavouriteUseCase
+import com.codemobiles.domain.usecase.mobileList.GetPhoneListUseCase
+import com.codemobiles.domain.usecase.photoList.GetPhotoUseCase
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -83,5 +93,51 @@ class AppModule{
         return mDatabaseAdapter.favoriteDao()
     }
 
+    @Provides
+    @Singleton
+    internal fun provideMobileMapper() : MobileEntityDataMapper {
+        return MobileEntityDataMapper()
+    }
 
+    @Provides
+    @Singleton
+    internal fun providePhotoMapper() : PhotoMapper {
+        return PhotoMapper()
+    }
+
+    @Provides
+    @Singleton
+    internal fun provideMobileRepository(apiManager: ApiInterface, mobileEntityDataMapper: MobileEntityDataMapper, mobileDAO: MobileDAO) : MobileRepository {
+        return MobileDataRepository(apiManager, mobileEntityDataMapper, mobileDAO)
+    }
+
+    @Provides
+    @Singleton
+    internal fun providePhotoRepository(apiManager: ApiInterface, photoMapper: PhotoMapper) : PhotoRepository {
+        return PhotoDataRepository(apiManager,photoMapper)
+    }
+
+    @Provides
+    @Singleton
+    internal fun provideAddFavouriteUseCase(mobileRepository: MobileRepository) : AddFavouriteUseCase {
+        return AddFavouriteUseCase(mobileRepository)
+    }
+
+    @Provides
+    @Singleton
+    internal fun provideRemoveFavouriteUseCase(mobileRepository: MobileRepository) : RemoveFavouriteUseCase {
+        return RemoveFavouriteUseCase(mobileRepository)
+    }
+
+    @Provides
+    @Singleton
+    internal fun provideGetPhoneListUseCase(mobileRepository: MobileRepository) : GetPhoneListUseCase {
+        return GetPhoneListUseCase(mobileRepository)
+    }
+
+    @Provides
+    @Singleton
+    internal fun provideGetPhotoUseCase(photoRepository: PhotoRepository) : GetPhotoUseCase {
+        return GetPhotoUseCase(photoRepository)
+    }
 }

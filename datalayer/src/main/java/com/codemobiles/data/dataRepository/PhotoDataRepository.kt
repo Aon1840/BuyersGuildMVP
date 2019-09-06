@@ -1,66 +1,18 @@
 package com.codemobiles.data.dataRepository
 
-import com.codemobiles.buyersguildmvp.database.MobileDAO
 import com.codemobiles.data.mapper.MobileEntityDataMapper
-import com.codemobiles.data.model.db.MobileEntity
+import com.codemobiles.data.mapper.PhotoMapper
 import com.codemobiles.data.network.ApiInterface
-import com.codemobiles.domain.model.MobileModel
-import com.codemobiles.domain.repository.MobileRepository
+import com.codemobiles.domain.model.PhotoListModel
+import com.codemobiles.domain.repository.PhotoRepository
 import io.reactivex.Observable
-import io.reactivex.functions.BiFunction
 
 class PhotoDataRepository constructor(
-    var apiManager: ApiInterface, var mobileEntityDataMapper: MobileEntityDataMapper, var favouriteMobileDAO: MobileDAO
-) : MobileRepository{
-    override fun getPhoneList(): Observable<List<MobileModel>> {
-        val api = apiManager.getPhones().concatMap {
-            Observable.just(mobileEntityDataMapper.transformApiToDataList(it))
+    var apiManager: ApiInterface, var photoMapper: PhotoMapper) : PhotoRepository {
+
+    override fun getPhoto(id: Int): Observable<List<PhotoListModel>> {
+        return apiManager.getImageList(id).concatMap { r ->
+            return@concatMap Observable.just(photoMapper.transformApiToDataList(r))
         }
-        val db = Observable.just(favouriteMobileDAO.queryFavorites())
-        return Observable.zip(api, db, BiFunction { t1, t2 ->
-            val tempList = ArrayList<MobileModel>()
-            for (i in 0 until t1.size) {
-                var contain = false
-                for (j in 0 until t2.size) {
-                    if (t1[i].id == t2[j].id) {
-                        contain = true
-                    }
-                }
-                val item = t1[i]
-                item.fav = contain
-                tempList.add(item)
-            }
-            return@BiFunction tempList
-        })
-    }
-
-    override fun addFavourite(data: MobileModel): Observable<Int> {
-        val item = MobileEntity(
-            data.id,
-            data.name,
-            data.description,
-            data.brand,
-            data.price,
-            data.rating,
-            data.thumbImageURL,
-            data.fav
-        )
-        Observable.just(favouriteMobileDAO.addFavorite(item))
-        return Observable.just(0)
-    }
-
-    override fun removeFavourite(data: MobileModel): Observable<Int> {
-        val item = MobileEntity(
-            data.id,
-            data.name,
-            data.description,
-            data.brand,
-            data.price,
-            data.rating,
-            data.thumbImageURL,
-            data.fav
-        )
-        Observable.just(favouriteMobileDAO.deleteFavorite(item))
-        return Observable.just(0)
     }
 }
