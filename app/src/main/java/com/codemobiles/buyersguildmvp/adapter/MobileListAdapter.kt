@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide
 import com.codemobiles.buyersguildmvp.INFORMATION
 import com.codemobiles.buyersguildmvp.R
 import com.codemobiles.buyersguildmvp.activity.DetailActivity
-import com.codemobiles.buyersguildmvp.model.MobileResponse
+import com.codemobiles.domain.model.MobileModel
 import kotlinx.android.synthetic.main.custom_mobile_list_item.view.txt_header
 import kotlinx.android.synthetic.main.custom_mobile_list_item.view.image_favorite
 import kotlinx.android.synthetic.main.custom_mobile_list_item.view.txt_description
@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.custom_mobile_list_item.view.txt_price
 class MobileListAdapter(private val setHolder: Int, private val mobileAdapterInterface: MobileAdapterInterface) :
     RecyclerView.Adapter<PhoneItemHolder>() {
 
-    private var mDataArray: ArrayList<MobileResponse> = arrayListOf()
+    private var mDataArray: ArrayList<MobileModel> = arrayListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhoneItemHolder {
         return PhoneItemHolder(
@@ -53,11 +53,11 @@ class MobileListAdapter(private val setHolder: Int, private val mobileAdapterInt
     }
 
     interface MobileAdapterInterface {
-        fun addFavMobile(mobile: MobileResponse)
-        fun removeFavMobile(mobile: MobileResponse)
+        fun addFavMobile(mobile: MobileModel)
+        fun removeFavMobile(mobile: MobileModel)
     }
 
-    fun submitList(list: ArrayList<MobileResponse>) {
+    fun submitList(list: ArrayList<MobileModel>) {
         mDataArray = list
         notifyDataSetChanged()
     }

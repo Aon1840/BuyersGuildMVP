@@ -34,6 +34,12 @@ class MobileDataRepository constructor(
         })
     }
 
+    override fun getPhoneFavouriteList(): Observable<List<MobileModel>> {
+        return Observable.just(mobileDao.queryFavorites()).map {
+            mobileEntityDataMapper.transformDBToDataList(it)
+        }
+    }
+
     override fun addFavourite(data: MobileModel): Observable<Int> {
         val item = MobileEntity(
             data.id,

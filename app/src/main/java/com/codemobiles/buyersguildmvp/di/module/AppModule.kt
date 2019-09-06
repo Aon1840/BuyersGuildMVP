@@ -14,6 +14,7 @@ import com.codemobiles.domain.repository.MobileRepository
 import com.codemobiles.domain.repository.PhotoRepository
 import com.codemobiles.domain.usecase.favorite.AddFavouriteUseCase
 import com.codemobiles.domain.usecase.favorite.RemoveFavouriteUseCase
+import com.codemobiles.domain.usecase.mobileList.GetPhoneFavouriteListUseCase
 import com.codemobiles.domain.usecase.mobileList.GetPhoneListUseCase
 import com.codemobiles.domain.usecase.photoList.GetPhotoUseCase
 import com.google.gson.Gson
@@ -133,6 +134,12 @@ class AppModule{
     @Singleton
     internal fun provideGetPhoneListUseCase(mobileRepository: MobileRepository) : GetPhoneListUseCase {
         return GetPhoneListUseCase(mobileRepository)
+    }
+
+    @Provides
+    @Singleton
+    internal fun provideGetPhoneFavouriteListUseCase(mobileRepository: MobileRepository) : GetPhoneFavouriteListUseCase {
+        return GetPhoneFavouriteListUseCase(mobileRepository)
     }
 
     @Provides

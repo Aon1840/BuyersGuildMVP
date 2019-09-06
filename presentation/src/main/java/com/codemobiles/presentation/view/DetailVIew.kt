@@ -1,6 +1,6 @@
-package com.codemobiles.buyersguildmvp.contract
+package com.codemobiles.presentation.view
 
-import com.codemobiles.buyersguildmvp.model.PhotoListResponse
+import com.codemobiles.domain.model.PhotoListModel
 import java.util.*
 
 
@@ -10,5 +10,5 @@ interface DetailVIew: BaseView {
     fun setPrice(price: String)
     fun setDescription(description: String)
     fun setRating(rating: String)
-    fun setImageList(imageList: ArrayList<PhotoListResponse>)
+    fun setImageList(imageList: ArrayList<PhotoListModel>)
 }

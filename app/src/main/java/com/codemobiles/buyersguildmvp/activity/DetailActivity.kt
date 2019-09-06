@@ -5,10 +5,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.codemobiles.buyersguildmvp.INFORMATION
 import com.codemobiles.buyersguildmvp.R
 import com.codemobiles.buyersguildmvp.adapter.PhotoListAdapter
-import com.codemobiles.buyersguildmvp.contract.DetailVIew
-import com.codemobiles.buyersguildmvp.model.MobileResponse
-import com.codemobiles.buyersguildmvp.model.PhotoListResponse
-import com.codemobiles.buyersguildmvp.presenter.DetailPresenter
+import com.codemobiles.presentation.view.DetailVIew
+import com.codemobiles.domain.model.MobileModel
+import com.codemobiles.domain.model.PhotoListModel
+import com.codemobiles.presentation.presenter.DetailPresenter
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_mobile_detail.txt_detailName
 import kotlinx.android.synthetic.main.activity_mobile_detail.txt_detailBrand
@@ -21,7 +21,7 @@ import javax.inject.Inject
 
 class DetailActivity : DaggerAppCompatActivity(), DetailVIew {
 
-    private var mData: MobileResponse? = null
+    private var mData: MobileModel? = null
     private var mAdapter: PhotoListAdapter? = null
 
     @Inject
@@ -53,7 +53,7 @@ class DetailActivity : DaggerAppCompatActivity(), DetailVIew {
         txt_detailRating.text = rating
     }
 
-    override fun setImageList(imageList: ArrayList<PhotoListResponse>) {
+    override fun setImageList(imageList: ArrayList<PhotoListModel>) {
         mAdapter?.sublistList(imageList)
     }
 
@@ -64,9 +64,9 @@ class DetailActivity : DaggerAppCompatActivity(), DetailVIew {
         detail_rcv.setAdapter(mAdapter)
         detail_rcv.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
-        mData = intent.extras?.getSerializable(INFORMATION) as MobileResponse
+        mData = intent.extras?.getSerializable(INFORMATION) as MobileModel
         mPresenter.getPassData(mData!!)
-        mPresenter.feedImageDetail(mData!!.id)
+        mPresenter.feedImageDetail()
         detail_toolbar.setNavigationOnClickListener {
             finish()
         }

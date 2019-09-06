@@ -5,10 +5,11 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.codemobiles.buyersguildmvp.FAVOURITE
 import com.codemobiles.buyersguildmvp.MOBILE_LIST
-import com.codemobiles.buyersguildmvp.contract.BaseSortInterface
+import com.codemobiles.presentation.view.BaseSortInterface
 import com.codemobiles.buyersguildmvp.fragment.FavouriteListFragment
 import com.codemobiles.buyersguildmvp.fragment.MobileListFragment
 import com.codemobiles.buyersguildmvp.model.MobileResponse
+import com.codemobiles.domain.model.MobileModel
 
 
 class SectionsPagerAdapter(private val fm: FragmentManager) : FragmentPagerAdapter(fm) {
@@ -22,7 +23,7 @@ class SectionsPagerAdapter(private val fm: FragmentManager) : FragmentPagerAdapt
         }
     }
 
-    fun getFavouriteMobile(): ArrayList<MobileResponse>? {
+    fun getFavouriteMobile(): ArrayList<MobileModel>? {
         val fragment = fm.fragments
         fragment.forEach { fragment ->
             if (fragment is MobileListFragment) {
@@ -43,7 +44,7 @@ class SectionsPagerAdapter(private val fm: FragmentManager) : FragmentPagerAdapt
         }
     }
 
-    fun getUnFavouriteMobile(): ArrayList<MobileResponse>? {
+    fun getUnFavouriteMobile(): ArrayList<MobileModel>? {
         val fragment = fm.fragments
         fragment.forEach { fragment ->
             if (fragment is FavouriteListFragment) {

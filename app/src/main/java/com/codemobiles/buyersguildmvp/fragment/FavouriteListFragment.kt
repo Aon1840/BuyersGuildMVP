@@ -10,10 +10,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.codemobiles.buyersguildmvp.R
 import com.codemobiles.buyersguildmvp.adapter.MobileListAdapter
-import com.codemobiles.buyersguildmvp.contract.BaseSortInterface
-import com.codemobiles.buyersguildmvp.contract.FavouriteListView
-import com.codemobiles.buyersguildmvp.model.MobileResponse
-import com.codemobiles.buyersguildmvp.presenter.MobileFavouriteListPresenter
+import com.codemobiles.presentation.view.BaseSortInterface
+import com.codemobiles.presentation.view.FavouriteListView
+import com.codemobiles.domain.model.MobileModel
+import com.codemobiles.presentation.presenter.MobileFavouriteListPresenter
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_recyclerview.view.rcv_frgment
 import javax.inject.Inject
@@ -23,7 +23,7 @@ class FavouriteListFragment : DaggerFragment(), FavouriteListView,
     BaseSortInterface {
 
     private var mAdapter: MobileListAdapter? = null
-    private var mDataArrayFavourite: ArrayList<MobileResponse> = arrayListOf()
+    private var mDataArrayFavourite: ArrayList<MobileModel> = arrayListOf()
 
     @Inject
     lateinit var mPresenter: MobileFavouriteListPresenter
@@ -47,7 +47,7 @@ class FavouriteListFragment : DaggerFragment(), FavouriteListView,
         mPresenter.sortMobile(mDataArrayFavourite, sortType)
     }
 
-    override fun showMobileFav(mobileFav: ArrayList<MobileResponse>) {
+    override fun showMobileFav(mobileFav: ArrayList<MobileModel>) {
         mDataArrayFavourite = mobileFav
         mAdapter?.submitList(mDataArrayFavourite)
     }
@@ -79,9 +79,9 @@ class FavouriteListFragment : DaggerFragment(), FavouriteListView,
     private fun setFavAdapter() {
         mAdapter = MobileListAdapter(1, object : MobileListAdapter.MobileAdapterInterface {
 
-            override fun addFavMobile(target: MobileResponse) {}
+            override fun addFavMobile(target: MobileModel) {}
 
-            override fun removeFavMobile(target: MobileResponse) {}
+            override fun removeFavMobile(target: MobileModel) {}
 
         })
     }
@@ -96,11 +96,11 @@ class FavouriteListFragment : DaggerFragment(), FavouriteListView,
         }
     }
 
-    fun sendDataFav(list: ArrayList<MobileResponse>?) {
+    fun sendDataFav(list: ArrayList<MobileModel>?) {
         mPresenter.setMobileFav(list)
     }
 
-    fun getUnFav(): ArrayList<MobileResponse> {
+    fun getUnFav(): ArrayList<MobileModel> {
         return mDataArrayFavourite
     }
 }

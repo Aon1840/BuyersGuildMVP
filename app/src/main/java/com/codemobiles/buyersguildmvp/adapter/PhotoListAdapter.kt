@@ -6,12 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.codemobiles.buyersguildmvp.R
-import com.codemobiles.buyersguildmvp.model.PhotoListResponse
+import com.codemobiles.domain.model.PhotoListModel
 import kotlinx.android.synthetic.main.grid_item_mobile_image.view.grid_item
 
 class PhotoListAdapter : RecyclerView.Adapter<PhotoHolder>() {
 
-    private var urlArray: ArrayList<PhotoListResponse> = arrayListOf()
+    private var urlArray: ArrayList<PhotoListModel> = arrayListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoHolder {
         return PhotoHolder(
@@ -23,7 +23,7 @@ class PhotoListAdapter : RecyclerView.Adapter<PhotoHolder>() {
         )
     }
 
-    fun sublistList(list: ArrayList<PhotoListResponse>) {
+    fun sublistList(list: ArrayList<PhotoListModel>) {
         urlArray = list
         notifyDataSetChanged()
     }
