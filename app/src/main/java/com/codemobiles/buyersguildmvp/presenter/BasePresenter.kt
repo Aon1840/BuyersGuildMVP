@@ -1,8 +1,7 @@
 package com.codemobiles.buyersguildmvp.presenter
 
-import com.codemobiles.buyersguildmvp.contract.BaseView
 
-abstract class BasePresenter<T : BaseView> {
+abstract class BasePresenter<T : com.codemobiles.buyersguildmvp.contract.BaseView> {
     protected var mView: T? = null
 
     fun setView(view: T) {

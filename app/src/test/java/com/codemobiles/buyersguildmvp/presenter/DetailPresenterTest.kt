@@ -1,8 +1,9 @@
 package com.codemobiles.buyersguildmvp.presenter
 
 import com.codemobiles.buyersguildmvp.api.ApiInterface
-import com.codemobiles.buyersguildmvp.contract.DetailVIew
+import com.codemobiles.presentation.view.DetailVIew
 import com.codemobiles.buyersguildmvp.model.MobileResponse
+import com.codemobiles.presentation.presenter.DetailPresenter
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import org.junit.Before
@@ -41,8 +42,8 @@ class DetailPresenterTest {
 
     @Test
     fun `feedImageDetail success`() {
-//        val response = Response.success(listOf<PhotoListResponse>(PhotoListResponse(1,1,"url"),PhotoListResponse(2,2,"url")))
-//        val captor = argumentCaptor<Callback<List<PhotoListResponse>>>()
+//        val response = Response.success(listOf<PhotoListModel>(PhotoListModel(1,1,"url"),PhotoListModel(2,2,"url")))
+//        val captor = argumentCaptor<Callback<List<PhotoListModel>>>()
 //        whenever(mApiManager.getImageList(1).execute()).thenReturn(response)
 //        mPresenter.feedImageDetail(1)
 //        verify(mApiManager).getImageList(1).enqueue(captor.capture())
@@ -53,8 +54,8 @@ class DetailPresenterTest {
 
     @Test
     fun `feedImageDetail fail`() {
-//        val response = Response.success(listOf<PhotoListResponse>(PhotoListResponse(1,1,"url"),PhotoListResponse(2,2,"url")))
-//        val captor = argumentCaptor<Callback<List<PhotoListResponse>>>()
+//        val response = Response.success(listOf<PhotoListModel>(PhotoListModel(1,1,"url"),PhotoListModel(2,2,"url")))
+//        val captor = argumentCaptor<Callback<List<PhotoListModel>>>()
 //        whenever(mApiManager.getImageList(1).execute()).thenReturn(response)
 //        mPresenter.feedImageDetail(1)
 //        verify(mApiManager).getImageList(1).enqueue(captor.capture())

@@ -4,9 +4,10 @@ import com.codemobiles.buyersguildmvp.PRICE_HIGHTOLOW
 import com.codemobiles.buyersguildmvp.PRICE_LOWTOHIGH
 import com.codemobiles.buyersguildmvp.RATE_5_1
 import com.codemobiles.buyersguildmvp.api.ApiInterface
-import com.codemobiles.buyersguildmvp.contract.MobileListView
+import com.codemobiles.presentation.view.MobileListView
 import com.codemobiles.buyersguildmvp.database.MobileDAO
 import com.codemobiles.buyersguildmvp.model.MobileResponse
+import com.codemobiles.presentation.presenter.MobileListPresenter
 import com.nhaarman.mockitokotlin2.*
 import io.reactivex.Observable
 import io.reactivex.Observer
@@ -19,7 +20,8 @@ class MobileListPresenterTest {
     private var mApiManager: ApiInterface = mock()
     private var mFavouriteMobileDAO: MobileDAO = mock()
     private var mView: MobileListView = mock()
-    private var mPresenter = MobileListPresenter(mApiManager, mFavouriteMobileDAO)
+    private var mPresenter =
+        MobileListPresenter(mApiManager, mFavouriteMobileDAO)
     private var mArray = arrayListOf<MobileResponse>()
     private var mArraySortByPriceLowToHight = arrayListOf<MobileResponse>()
     private var mArraySortByPriceHightToLow = arrayListOf<MobileResponse>()

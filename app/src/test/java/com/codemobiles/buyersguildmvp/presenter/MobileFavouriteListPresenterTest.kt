@@ -3,9 +3,10 @@ package com.codemobiles.buyersguildmvp.presenter
 import com.codemobiles.buyersguildmvp.PRICE_HIGHTOLOW
 import com.codemobiles.buyersguildmvp.PRICE_LOWTOHIGH
 import com.codemobiles.buyersguildmvp.RATE_5_1
-import com.codemobiles.buyersguildmvp.contract.FavouriteListView
+import com.codemobiles.presentation.view.FavouriteListView
 import com.codemobiles.buyersguildmvp.database.MobileDAO
 import com.codemobiles.buyersguildmvp.model.MobileResponse
+import com.codemobiles.presentation.presenter.MobileFavouriteListPresenter
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify

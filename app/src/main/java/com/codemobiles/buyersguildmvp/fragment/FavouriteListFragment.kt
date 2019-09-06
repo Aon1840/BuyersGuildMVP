@@ -19,7 +19,8 @@ import kotlinx.android.synthetic.main.fragment_recyclerview.view.rcv_frgment
 import javax.inject.Inject
 
 
-class FavouriteListFragment : DaggerFragment(), FavouriteListView, BaseSortInterface {
+class FavouriteListFragment : DaggerFragment(), FavouriteListView,
+    BaseSortInterface {
 
     private var mAdapter: MobileListAdapter? = null
     private var mDataArrayFavourite: ArrayList<MobileResponse> = arrayListOf()

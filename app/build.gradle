@@ -64,11 +64,11 @@ dependencies {
 
     implementation 'com.android.support:multidex:1.0.3'
 
-    implementation project(path: ':datalayer')
-    implementation project(path: ':domainlayer')
-    implementation project(path: ':presentation')
-
     testImplementation "org.mockito:mockito-core:2.27.0"
     testImplementation "org.mockito:mockito-inline:2.27.0"
     testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.1.0"
+
+    api project(':datalayer')
+    api project(':domainlayer')
+    api project(':presentation')
 }

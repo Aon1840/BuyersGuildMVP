@@ -9,6 +9,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
+
 class DetailPresenter constructor(var apiManager: ApiInterface) : BasePresenter<DetailVIew>() {
 
     fun getPassData(mobile: MobileResponse) {

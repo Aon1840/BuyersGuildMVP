@@ -15,7 +15,8 @@ import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_recyclerview.rcv_frgment
 import javax.inject.Inject
 
-class MobileListFragment : DaggerFragment(), MobileListView, BaseSortInterface {
+class MobileListFragment : DaggerFragment(), MobileListView,
+    BaseSortInterface {
 
     private var mDataArray: ArrayList<MobileResponse> = arrayListOf()
     private var mAdapter: MobileListAdapter? = null
