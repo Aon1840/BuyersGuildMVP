@@ -1,12 +1,9 @@
 package com.codemobiles.presentation.presenter
 
-import com.codemobiles.buyersguildmvp.model.PhotoListResponse
 import com.codemobiles.domain.model.MobileModel
 import com.codemobiles.domain.model.PhotoListModel
 import com.codemobiles.domain.usecase.photoList.GetPhotoUseCase
 import com.codemobiles.presentation.view.DetailVIew
-import io.reactivex.Observer
-import io.reactivex.disposables.Disposable
 import io.reactivex.observers.DisposableObserver
 
 
@@ -20,7 +17,7 @@ class DetailPresenter constructor(private var getPhotoUseCase: GetPhotoUseCase) 
         mView?.setRating(mobile.rating.toString())
     }
 
-    fun feedImageDetail() {
+    fun feedImageDetail(id: Int) {
         getPhotoUseCase.execute(object : DisposableObserver<List<PhotoListModel>>() {
             override fun onComplete() {
 
@@ -37,7 +34,7 @@ class DetailPresenter constructor(private var getPhotoUseCase: GetPhotoUseCase) 
             }
 
 
-        }, null)
+        }, id)
     }
 }
 

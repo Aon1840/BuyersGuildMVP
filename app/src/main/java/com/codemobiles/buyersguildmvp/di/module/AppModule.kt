@@ -5,6 +5,7 @@ import com.codemobiles.buyersguildmvp.application.MyApplication
 import com.codemobiles.buyersguildmvp.database.AppDatabase
 import com.codemobiles.buyersguildmvp.database.MobileDAO
 import com.codemobiles.buyersguildmvp.model.MobileResponse
+import com.codemobiles.buyersguildmvp.model.PhotoListResponse
 import com.codemobiles.data.dataRepository.MobileDataRepository
 import com.codemobiles.data.dataRepository.PhotoDataRepository
 import com.codemobiles.data.mapper.MobileEntityDataMapper
@@ -70,11 +71,17 @@ class AppModule{
             .build()
     }
 
-    @Provides
-    @Singleton
-    internal fun provideCallListMobile(retrofit: Retrofit): Observable<List<MobileResponse>> {
-        return retrofit.create(ApiInterface::class.java).getPhones()
-    }
+//    @Provides
+//    @Singleton
+//    internal fun provideCallListMobile(retrofit: Retrofit): Observable<List<MobileResponse>> {
+//        return retrofit.create(ApiInterface::class.java).getPhones()
+//    }
+//
+//    @Provides
+//    @Singleton
+//    internal fun provideCallPhoto(id: Int,retrofit: Retrofit): Observable<List<PhotoListResponse>> {
+//        return retrofit.create(ApiInterface::class.java).getImageList(id)
+//    }
 
     @Provides
     @Singleton

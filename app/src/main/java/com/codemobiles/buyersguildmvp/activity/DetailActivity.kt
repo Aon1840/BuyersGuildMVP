@@ -66,7 +66,7 @@ class DetailActivity : DaggerAppCompatActivity(), DetailVIew {
 
         mData = intent.extras?.getSerializable(INFORMATION) as MobileModel
         mPresenter.getPassData(mData!!)
-        mPresenter.feedImageDetail()
+        mPresenter.feedImageDetail(mData!!.id)
         detail_toolbar.setNavigationOnClickListener {
             finish()
         }
