@@ -3,10 +3,10 @@ package com.codemobiles.buyersguildmvp.presenter
 import com.codemobiles.buyersguildmvp.PRICE_HIGHTOLOW
 import com.codemobiles.buyersguildmvp.PRICE_LOWTOHIGH
 import com.codemobiles.buyersguildmvp.RATE_5_1
-import com.codemobiles.buyersguildmvp.api.ApiInterface
 import com.codemobiles.presentation.view.MobileListView
 import com.codemobiles.buyersguildmvp.database.MobileDAO
 import com.codemobiles.buyersguildmvp.model.MobileResponse
+import com.codemobiles.data.network.ApiInterface
 import com.codemobiles.presentation.presenter.MobileListPresenter
 import com.nhaarman.mockitokotlin2.*
 import io.reactivex.Observable

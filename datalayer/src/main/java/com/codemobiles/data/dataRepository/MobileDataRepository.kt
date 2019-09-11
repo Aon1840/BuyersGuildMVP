@@ -6,15 +6,16 @@ import com.codemobiles.data.model.db.MobileEntity
 import com.codemobiles.data.network.ApiInterface
 import com.codemobiles.domain.model.MobileModel
 import com.codemobiles.domain.repository.MobileRepository
+import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.functions.BiFunction
 
 class MobileDataRepository constructor(
-    var apiManager: ApiInterface, var mobileEntityDataMapper: MobileEntityDataMapper, var mobileDao: MobileDAO
+    private var apiManager: ApiInterface, var mobileEntityDataMapper: MobileEntityDataMapper, var mobileDao: MobileDAO
 ) : MobileRepository{
     override fun getPhoneList(): Observable<List<MobileModel>> {
-        val api = apiManager.getPhones().concatMap {
-            Observable.just(mobileEntityDataMapper.transformApiToDataList(it))
+        val api = apiManager.getPhones().map {
+            mobileEntityDataMapper.transformApiToDataList(it)
         }
         val db = Observable.just(mobileDao.queryFavorites())
         return Observable.zip(api, db, BiFunction { t1, t2 ->
@@ -40,7 +41,7 @@ class MobileDataRepository constructor(
         }
     }
 
-    override fun addFavourite(data: MobileModel): Observable<Int> {
+    override fun addFavourite(data: MobileModel): Observable<Completable> {
         val item = MobileEntity(
             data.id,
             data.name,
@@ -51,11 +52,12 @@ class MobileDataRepository constructor(
             data.thumbImageURL,
             data.fav
         )
-        Observable.just(mobileDao.addFavorite(item))
-        return Observable.just(0)
+//        Observable.just(mobileDao.addFavorite(item))
+//        return mobileDao.addFavorite(item)
+        return Observable.just(mobileDao.addFavorite(item))
     }
 
-    override fun removeFavourite(data: MobileModel): Observable<Int> {
+    override fun removeFavourite(data: MobileModel): Observable<Completable> {
         val item = MobileEntity(
             data.id,
             data.name,
@@ -66,7 +68,8 @@ class MobileDataRepository constructor(
             data.thumbImageURL,
             data.fav
         )
-        Observable.just(mobileDao.deleteFavorite(item))
-        return Observable.just(0)
+//        Observable.just(mobileDao.deleteFavorite(item))
+//        return Observable.just(0)
+        return Observable.just(mobileDao.deleteFavorite(item))
     }
 }

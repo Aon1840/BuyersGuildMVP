@@ -14,19 +14,26 @@ import com.codemobiles.presentation.view.BaseSortInterface
 import com.codemobiles.presentation.view.FavouriteListView
 import com.codemobiles.domain.model.MobileModel
 import com.codemobiles.presentation.presenter.MobileFavouriteListPresenter
+import com.codemobiles.presentation.view.FragmentView
+import com.codemobiles.presentation.view.MainView
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_recyclerview.view.rcv_frgment
 import javax.inject.Inject
 
 
 class FavouriteListFragment : DaggerFragment(), FavouriteListView,
-    BaseSortInterface {
+    BaseSortInterface, FragmentView {
 
     private var mAdapter: MobileListAdapter? = null
     private var mDataArrayFavourite: ArrayList<MobileModel> = arrayListOf()
 
     @Inject
     lateinit var mPresenter: MobileFavouriteListPresenter
+    private var mainView: MainView? = null
+
+    fun setMainView(mainView: MainView){
+        this.mainView = mainView
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -96,11 +103,16 @@ class FavouriteListFragment : DaggerFragment(), FavouriteListView,
         }
     }
 
-    fun sendDataFav(list: ArrayList<MobileModel>?) {
+    fun setDataFav(list: ArrayList<MobileModel>?) {
         mPresenter.setMobileFav(list)
     }
 
-    fun getUnFav(): ArrayList<MobileModel> {
+    fun getFav(): ArrayList<MobileModel> {
         return mDataArrayFavourite
+    }
+
+    override fun addFavorite(data: MobileModel) {
+        mDataArrayFavourite.add(data)
+        mAdapter?.submitList(mDataArrayFavourite)
     }
 }

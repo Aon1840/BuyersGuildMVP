@@ -5,14 +5,60 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.codemobiles.buyersguildmvp.FAVOURITE
 import com.codemobiles.buyersguildmvp.MOBILE_LIST
-import com.codemobiles.presentation.view.BaseSortInterface
 import com.codemobiles.buyersguildmvp.fragment.FavouriteListFragment
 import com.codemobiles.buyersguildmvp.fragment.MobileListFragment
-import com.codemobiles.buyersguildmvp.model.MobileResponse
 import com.codemobiles.domain.model.MobileModel
+import com.codemobiles.presentation.view.BaseSortInterface
+import com.codemobiles.presentation.view.FragmentView
+import com.codemobiles.presentation.view.MainView
 
 
-class SectionsPagerAdapter(private val fm: FragmentManager) : FragmentPagerAdapter(fm) {
+class SectionsPagerAdapter(
+    private val fm: FragmentManager,
+    private val mainView: MainView,
+    private val mainView2: MainView
+) : FragmentPagerAdapter(fm) {
+    var listFragment: FragmentView? = null
+    var favFragment: FragmentView? = null
+
+    private fun getListMobile(): ArrayList<MobileModel>? {
+        val fragment = fm.fragments
+        fragment.forEach { fragment ->
+            if (fragment is MobileListFragment) {
+                return fragment.getFavData()
+            }
+        }
+        return null
+    }
+
+    private fun getFavouriteListMobile(): ArrayList<MobileModel>? {
+        fm.fragments.forEach { fragment ->
+            if (fragment is FavouriteListFragment) {
+                return fragment.getFav()
+            }
+        }
+        return null
+    }
+
+    fun setListMobile() {
+        val mobile = getFavouriteListMobile()
+        val fragment = fm.fragments
+        fragment.forEach { fragment ->
+            if (fragment is MobileListFragment) {
+                fragment.checkCurrentFav(mobile)
+            }
+        }
+    }
+
+    fun setFavouriteMobile() {
+        val favMobile = getListMobile()
+        val fragment = fm.fragments
+        fragment.forEach { fragment ->
+            if (fragment is FavouriteListFragment) {
+                fragment.setDataFav(favMobile)
+            }
+        }
+    }
 
     fun updateSortType(sortType: String) {
         val fragment = fm.fragments
@@ -23,55 +69,21 @@ class SectionsPagerAdapter(private val fm: FragmentManager) : FragmentPagerAdapt
         }
     }
 
-    fun getFavouriteMobile(): ArrayList<MobileModel>? {
-        val fragment = fm.fragments
-        fragment.forEach { fragment ->
-            if (fragment is MobileListFragment) {
-                return fragment.getFavData()
-            }
-
-        }
-        return null
-    }
-
-    fun setFavouriteMobile() {
-        val favMobile = getFavouriteMobile()
-        val fragment = fm.fragments
-        fragment.forEach {fragment ->
-            if (fragment is FavouriteListFragment) {
-                fragment.sendDataFav(favMobile)
-            }
-        }
-    }
-
-    fun getUnFavouriteMobile(): ArrayList<MobileModel>? {
-        val fragment = fm.fragments
-        fragment.forEach { fragment ->
-            if (fragment is FavouriteListFragment) {
-                return fragment.getUnFav()
-            }
-
-        }
-        return null
-    }
-
-    fun setUnFavouriteMobile() {
-        val unfavMobile = getUnFavouriteMobile()
-        val fragment = fm.fragments
-        fragment.forEach {fragment ->
-            if (fragment is MobileListFragment) {
-                fragment.checkUnFav(unfavMobile)
-            }
-        }
-    }
-
     override fun getItem(position: Int): Fragment {
         return when (position) {
             0 -> {
-                return MobileListFragment()
+                val fragment = MobileListFragment().apply {
+                    this.setMainView(mainView)
+                }
+                listFragment = fragment
+                fragment
             }
             else -> {
-                return FavouriteListFragment()
+                val fragment = FavouriteListFragment().apply {
+                    this.setMainView(mainView2)
+                }
+                favFragment = fragment
+                fragment
             }
         }
     }

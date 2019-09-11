@@ -10,8 +10,8 @@ class PhotoDataRepository constructor(
     var apiManager: ApiInterface, var photoMapper: PhotoMapper) : PhotoRepository {
 
     override fun getPhoto(id: Int): Observable<List<PhotoListModel>> {
-        return apiManager.getImageList(id).concatMap { r ->
-            return@concatMap Observable.just(photoMapper.transformApiToDataList(r))
+        return apiManager.getImageList(id).map { r ->
+             photoMapper.transformApiToDataList(r)
         }
     }
 }

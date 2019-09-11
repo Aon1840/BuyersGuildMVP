@@ -4,7 +4,7 @@ import com.codemobiles.domain.model.PhotoListModel
 import java.util.*
 
 
-interface DetailVIew: BaseView {
+interface DetailVIew : BaseView {
     fun setName(name: String)
     fun setBrand(brand: String)
     fun setPrice(price: String)

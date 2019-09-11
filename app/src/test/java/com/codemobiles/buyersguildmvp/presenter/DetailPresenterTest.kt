@@ -1,8 +1,8 @@
 package com.codemobiles.buyersguildmvp.presenter
 
-import com.codemobiles.buyersguildmvp.api.ApiInterface
-import com.codemobiles.presentation.view.DetailVIew
 import com.codemobiles.buyersguildmvp.model.MobileResponse
+import com.codemobiles.data.network.ApiInterface
+import com.codemobiles.presentation.view.DetailVIew
 import com.codemobiles.presentation.presenter.DetailPresenter
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify

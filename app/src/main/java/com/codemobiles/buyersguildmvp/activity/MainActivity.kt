@@ -8,6 +8,8 @@ import androidx.viewpager.widget.ViewPager
 import com.codemobiles.buyersguildmvp.LIST_SORT
 import com.codemobiles.buyersguildmvp.R
 import com.codemobiles.buyersguildmvp.adapter.SectionsPagerAdapter
+import com.codemobiles.domain.model.MobileModel
+import com.codemobiles.presentation.view.MainView
 import kotlinx.android.synthetic.main.activity_main.main_viewPager
 import kotlinx.android.synthetic.main.activity_main.main_tab
 import kotlinx.android.synthetic.main.activity_main.image_filter
@@ -21,7 +23,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        sectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
+        sectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager,object: MainView {
+            override fun addFavorite(mobile: MobileModel) {
+                sectionsPagerAdapter?.favFragment?.addFavorite(mobile)
+            }
+
+        },object: MainView {
+            override fun addFavorite(mobile: MobileModel) {
+                sectionsPagerAdapter?.listFragment?.addFavorite(mobile)
+            }
+
+        })
         main_viewPager.adapter = sectionsPagerAdapter
         main_tab.setupWithViewPager(main_viewPager)
         main_viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
@@ -33,7 +45,7 @@ class MainActivity : AppCompatActivity() {
                 when (position) {
                     0 -> {
                         currentPage = 0
-                        sectionsPagerAdapter?.setUnFavouriteMobile()
+                        sectionsPagerAdapter?.setListMobile()
                     }
                     else -> {
                         currentPage = 1

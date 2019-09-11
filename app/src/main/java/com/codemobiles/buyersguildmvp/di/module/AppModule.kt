@@ -4,8 +4,6 @@ import android.app.Application
 import com.codemobiles.buyersguildmvp.application.MyApplication
 import com.codemobiles.buyersguildmvp.database.AppDatabase
 import com.codemobiles.buyersguildmvp.database.MobileDAO
-import com.codemobiles.buyersguildmvp.model.MobileResponse
-import com.codemobiles.buyersguildmvp.model.PhotoListResponse
 import com.codemobiles.data.dataRepository.MobileDataRepository
 import com.codemobiles.data.dataRepository.PhotoDataRepository
 import com.codemobiles.data.mapper.MobileEntityDataMapper
@@ -22,7 +20,6 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
-import io.reactivex.Observable
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -70,18 +67,6 @@ class AppModule{
             .baseUrl("https://scb-test-mobile.herokuapp.com/")
             .build()
     }
-
-//    @Provides
-//    @Singleton
-//    internal fun provideCallListMobile(retrofit: Retrofit): Observable<List<MobileResponse>> {
-//        return retrofit.create(ApiInterface::class.java).getPhones()
-//    }
-//
-//    @Provides
-//    @Singleton
-//    internal fun provideCallPhoto(id: Int,retrofit: Retrofit): Observable<List<PhotoListResponse>> {
-//        return retrofit.create(ApiInterface::class.java).getImageList(id)
-//    }
 
     @Provides
     @Singleton

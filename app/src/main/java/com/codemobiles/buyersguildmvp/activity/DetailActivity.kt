@@ -61,7 +61,7 @@ class DetailActivity : DaggerAppCompatActivity(), DetailVIew {
         mPresenter.setView(this)
         mAdapter = PhotoListAdapter()
 
-        detail_rcv.setAdapter(mAdapter)
+        detail_rcv.adapter = mAdapter
         detail_rcv.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
         mData = intent.extras?.getSerializable(INFORMATION) as MobileModel

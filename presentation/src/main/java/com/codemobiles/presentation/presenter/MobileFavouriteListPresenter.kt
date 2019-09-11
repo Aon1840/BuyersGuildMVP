@@ -7,17 +7,18 @@ import com.codemobiles.presentation.PRICE_HIGHTOLOW
 import com.codemobiles.presentation.PRICE_LOWTOHIGH
 import com.codemobiles.presentation.RATE_5_1
 import com.codemobiles.presentation.view.FavouriteListView
+import io.reactivex.Completable
 import io.reactivex.observers.DisposableObserver
 
 class MobileFavouriteListPresenter constructor(private val removeFavouriteUseCase: RemoveFavouriteUseCase) : BasePresenter<FavouriteListView>() {
 
     fun removeMobileFav(mobileListFav: ArrayList<MobileModel>, position: Int) {
-        removeFavouriteUseCase.execute(object : DisposableObserver<Int>() {
+        removeFavouriteUseCase.execute(object : DisposableObserver<Completable>() {
             override fun onComplete() {
 
             }
 
-            override fun onNext(t: Int) {
+            override fun onNext(t: Completable) {
                 mobileListFav.removeAt(position)
                 mView?.showMobileFav(mobileListFav)
             }

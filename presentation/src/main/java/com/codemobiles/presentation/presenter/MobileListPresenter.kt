@@ -11,6 +11,7 @@ import com.codemobiles.presentation.RATE_5_1
 import com.codemobiles.presentation.view.MobileListView
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import io.reactivex.Completable
 import io.reactivex.observers.DisposableObserver
 
 class MobileListPresenter constructor(
@@ -21,7 +22,7 @@ class MobileListPresenter constructor(
 ) :
     BasePresenter<MobileListView>() {
 
-    private var mDataArray: ArrayList<MobileModel> = arrayListOf()
+    private var mDataArray = arrayListOf<MobileModel>()
 
 
     fun feedMobileList() {
@@ -31,7 +32,7 @@ class MobileListPresenter constructor(
             }
 
             override fun onNext(t: List<MobileModel>) {
-                var mDataArray: ArrayList<MobileModel> = arrayListOf()
+                val mDataArray = arrayListOf<MobileModel>()
                 mDataArray.addAll(t)
                 mView?.setPreFavourite()
                 mView?.showMobileList(mDataArray)
@@ -76,11 +77,12 @@ class MobileListPresenter constructor(
     }
 
     fun addFavoriteMobile(mobile: MobileModel) {
-        addFavouriteUseCase.execute(object : DisposableObserver<Int>() {
+        addFavouriteUseCase.execute(object : DisposableObserver<Completable>() {
             override fun onComplete() {}
 
-            override fun onNext(t: Int) {
+            override fun onNext(t: Completable) {
                 mDataArray.add(mobile)
+                mView?.favoriteAddComplete(mobile)
             }
 
             override fun onError(e: Throwable) {}
@@ -89,10 +91,10 @@ class MobileListPresenter constructor(
     }
 
     fun removeFavoriteMobile(mobile: MobileModel) {
-        removeFavouriteUseCase.execute(object : DisposableObserver<Int>() {
+        removeFavouriteUseCase.execute(object : DisposableObserver<Completable>() {
             override fun onComplete() {}
 
-            override fun onNext(t: Int) {
+            override fun onNext(t: Completable) {
                 mobile.fav = true
                 mDataArray.remove(mobile)
             }
