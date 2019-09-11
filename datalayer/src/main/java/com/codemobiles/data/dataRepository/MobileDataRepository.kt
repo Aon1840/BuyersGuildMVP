@@ -52,8 +52,6 @@ class MobileDataRepository constructor(
             data.thumbImageURL,
             data.fav
         )
-//        Observable.just(mobileDao.addFavorite(item))
-//        return mobileDao.addFavorite(item)
         return Observable.just(mobileDao.addFavorite(item))
     }
 
