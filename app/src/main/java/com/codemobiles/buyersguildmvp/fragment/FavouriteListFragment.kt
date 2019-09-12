@@ -115,4 +115,13 @@ class FavouriteListFragment : DaggerFragment(), FavouriteListView,
         mDataArrayFavourite.add(data)
         mAdapter?.submitList(mDataArrayFavourite)
     }
+
+    override fun removeFavourite(mobile: MobileModel) {
+        mDataArrayFavourite.remove(mobile)
+        mAdapter?.submitList(mDataArrayFavourite)
+    }
+
+    override fun favoriteRemoveComplete(mobile: MobileModel) {
+        mainView?.removeFavourite(mobile)
+    }
 }

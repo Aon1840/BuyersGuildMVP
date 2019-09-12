@@ -4,4 +4,5 @@ import com.codemobiles.domain.model.MobileModel
 
 interface MainView{
     fun addFavorite(mobile: MobileModel)
+    fun removeFavourite(mobile: MobileModel)
 }

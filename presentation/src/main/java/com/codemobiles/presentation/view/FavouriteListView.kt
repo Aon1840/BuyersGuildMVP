@@ -5,4 +5,5 @@ import java.util.*
 
 interface FavouriteListView : BaseView {
     fun showMobileFav(mobileFav: ArrayList<MobileModel>)
+    fun favoriteRemoveComplete(mobile: MobileModel)
 }

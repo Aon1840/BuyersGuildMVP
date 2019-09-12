@@ -8,4 +8,5 @@ interface MobileListView : BaseView {
     fun showMobileList(phoneList: ArrayList<MobileModel>)
     fun setPreFavourite()
     fun favoriteAddComplete(mobile: MobileModel)
+    fun favoriteRemoveComplete(mobile: MobileModel)
 }

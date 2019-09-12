@@ -24,11 +24,18 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         sectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager,object: MainView {
+            override fun removeFavourite(mobile: MobileModel) {
+                sectionsPagerAdapter?.favFragment?.removeFavourite(mobile)
+            }
+
             override fun addFavorite(mobile: MobileModel) {
                 sectionsPagerAdapter?.favFragment?.addFavorite(mobile)
             }
-
         },object: MainView {
+            override fun removeFavourite(mobile: MobileModel) {
+
+            }
+
             override fun addFavorite(mobile: MobileModel) {
                 sectionsPagerAdapter?.listFragment?.addFavorite(mobile)
             }

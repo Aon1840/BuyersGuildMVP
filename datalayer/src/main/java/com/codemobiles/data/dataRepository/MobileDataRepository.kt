@@ -66,8 +66,9 @@ class MobileDataRepository constructor(
             data.thumbImageURL,
             data.fav
         )
-//        Observable.just(mobileDao.deleteFavorite(item))
-//        return Observable.just(0)
+
+
+
         return Observable.just(mobileDao.deleteFavorite(item))
     }
 }

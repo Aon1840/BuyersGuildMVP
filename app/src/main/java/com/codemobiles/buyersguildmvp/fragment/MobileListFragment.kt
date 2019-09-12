@@ -96,4 +96,12 @@ class MobileListFragment : DaggerFragment(), MobileListView,
     override fun addFavorite(data: MobileModel) {
         mPresenter.addFavoriteMobile(data)
     }
+
+    override fun favoriteRemoveComplete(mobile: MobileModel) {
+        mainView?.removeFavourite(mobile)
+    }
+
+    override fun removeFavourite(mobile: MobileModel) {
+        mPresenter.removeFavoriteMobile(mobile)
+    }
 }
