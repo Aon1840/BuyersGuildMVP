@@ -90,7 +90,6 @@ class MobileListFragment : DaggerFragment(), MobileListView,
 
     override fun favoriteAddComplete(mobile: MobileModel) {
         mainView?.addFavorite(mobile)
-
     }
 
     override fun addFavorite(data: MobileModel) {

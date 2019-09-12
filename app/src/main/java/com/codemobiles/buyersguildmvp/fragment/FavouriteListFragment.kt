@@ -112,7 +112,6 @@ class FavouriteListFragment : DaggerFragment(), FavouriteListView,
     }
 
     override fun addFavorite(data: MobileModel) {
-        mDataArrayFavourite.add(data)
         mAdapter?.submitList(mDataArrayFavourite)
     }
 

@@ -10,9 +10,7 @@ import com.codemobiles.buyersguildmvp.R
 import com.codemobiles.buyersguildmvp.adapter.SectionsPagerAdapter
 import com.codemobiles.domain.model.MobileModel
 import com.codemobiles.presentation.view.MainView
-import kotlinx.android.synthetic.main.activity_main.main_viewPager
-import kotlinx.android.synthetic.main.activity_main.main_tab
-import kotlinx.android.synthetic.main.activity_main.image_filter
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,7 +31,7 @@ class MainActivity : AppCompatActivity() {
             }
         },object: MainView {
             override fun removeFavourite(mobile: MobileModel) {
-
+                sectionsPagerAdapter?.listFragment?.removeFavourite(mobile)
             }
 
             override fun addFavorite(mobile: MobileModel) {

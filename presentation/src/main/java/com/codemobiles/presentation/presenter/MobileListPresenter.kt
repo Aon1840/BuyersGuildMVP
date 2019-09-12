@@ -11,7 +11,6 @@ import com.codemobiles.presentation.RATE_5_1
 import com.codemobiles.presentation.view.MobileListView
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import io.reactivex.Completable
 import io.reactivex.observers.DisposableObserver
 
 class MobileListPresenter constructor(
@@ -97,6 +96,7 @@ class MobileListPresenter constructor(
             override fun onNext(t: Int) {
                 mobile.fav = true
                 mDataArray.remove(mobile)
+                mView?.favoriteRemoveComplete(mobile)
             }
 
             override fun onError(e: Throwable) {}
