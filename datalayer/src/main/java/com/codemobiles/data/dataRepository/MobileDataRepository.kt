@@ -41,7 +41,7 @@ class MobileDataRepository constructor(
         }
     }
 
-    override fun addFavourite(data: MobileModel): Observable<Completable> {
+    override fun addFavourite(data: MobileModel): Observable<Int> {
         val item = MobileEntity(
             data.id,
             data.name,
@@ -52,10 +52,12 @@ class MobileDataRepository constructor(
             data.thumbImageURL,
             data.fav
         )
-        return Observable.just(mobileDao.addFavorite(item))
+//        return Observable.just(mobileDao.addFavorite(item))
+        Observable.just(mobileDao.addFavorite(item))
+        return Observable.just(0)
     }
 
-    override fun removeFavourite(data: MobileModel): Observable<Completable> {
+    override fun removeFavourite(data: MobileModel): Observable<Int> {
         val item = MobileEntity(
             data.id,
             data.name,
@@ -67,8 +69,8 @@ class MobileDataRepository constructor(
             data.fav
         )
 
-
-
-        return Observable.just(mobileDao.deleteFavorite(item))
+//        return Observable.just(mobileDao.deleteFavorite(item))
+        Observable.just(mobileDao.deleteFavorite(item))
+        return Observable.just(0)
     }
 }

@@ -6,8 +6,8 @@ import com.codemobiles.domain.usecase.BaseUseCase
 import io.reactivex.Completable
 import io.reactivex.Observable
 
-class RemoveFavouriteUseCase constructor(private val mobileRepository: MobileRepository) : BaseUseCase<Completable, MobileModel>() {
-    override fun getObservable(params: MobileModel?): Observable<Completable> {
+class RemoveFavouriteUseCase constructor(private val mobileRepository: MobileRepository) : BaseUseCase<Int, MobileModel>() {
+    override fun getObservable(params: MobileModel?): Observable<Int> {
         return mobileRepository.removeFavourite(params!!)
     }
 }

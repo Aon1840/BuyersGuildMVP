@@ -13,12 +13,12 @@ import io.reactivex.observers.DisposableObserver
 class MobileFavouriteListPresenter constructor(private val removeFavouriteUseCase: RemoveFavouriteUseCase) : BasePresenter<FavouriteListView>() {
 
     fun removeMobileFav(mobileListFav: ArrayList<MobileModel>, position: Int) {
-        removeFavouriteUseCase.execute(object : DisposableObserver<Completable>() {
+        removeFavouriteUseCase.execute(object : DisposableObserver<Int>() {
             override fun onComplete() {
 
             }
 
-            override fun onNext(t: Completable) {
+            override fun onNext(t: Int) {
                 mobileListFav.removeAt(position)
                 mView?.showMobileFav(mobileListFav)
             }

@@ -77,10 +77,10 @@ class MobileListPresenter constructor(
     }
 
     fun addFavoriteMobile(mobile: MobileModel) {
-        addFavouriteUseCase.execute(object : DisposableObserver<Completable>() {
+        addFavouriteUseCase.execute(object : DisposableObserver<Int>() {
             override fun onComplete() {}
 
-            override fun onNext(t: Completable) {
+            override fun onNext(t: Int) {
                 mDataArray.add(mobile)
                 mView?.favoriteAddComplete(mobile)
             }
@@ -91,10 +91,10 @@ class MobileListPresenter constructor(
     }
 
     fun removeFavoriteMobile(mobile: MobileModel) {
-        removeFavouriteUseCase.execute(object : DisposableObserver<Completable>() {
+        removeFavouriteUseCase.execute(object : DisposableObserver<Int>() {
             override fun onComplete() {}
 
-            override fun onNext(t: Completable) {
+            override fun onNext(t: Int) {
                 mobile.fav = true
                 mDataArray.remove(mobile)
             }

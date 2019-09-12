@@ -13,8 +13,10 @@ interface MobileDAO {
     fun queryFavorites(): List<MobileEntity>
 
     @Insert
-    fun addFavorite(favoriteEntity: MobileEntity): Completable
+    fun addFavorite(favoriteEntity: MobileEntity)
+//    fun addFavorite(favoriteEntity: MobileEntity): Completable
 
     @Delete
-    fun deleteFavorite(favoriteEntity: MobileEntity): Completable
+    fun deleteFavorite(favoriteEntity: MobileEntity)
+//    fun deleteFavorite(favoriteEntity: MobileEntity): Completable
 }
