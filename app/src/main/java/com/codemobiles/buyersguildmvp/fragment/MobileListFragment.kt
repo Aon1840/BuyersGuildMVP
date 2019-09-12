@@ -7,14 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.codemobiles.buyersguildmvp.adapter.MobileListAdapter
-import com.codemobiles.presentation.view.BaseSortInterface
-import com.codemobiles.presentation.view.MobileListView
 import com.codemobiles.domain.model.MobileModel
 import com.codemobiles.presentation.presenter.MobileListPresenter
+import com.codemobiles.presentation.view.BaseSortInterface
 import com.codemobiles.presentation.view.FragmentView
 import com.codemobiles.presentation.view.MainView
+import com.codemobiles.presentation.view.MobileListView
 import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.fragment_recyclerview.rcv_frgment
+import kotlinx.android.synthetic.main.fragment_recyclerview.*
 import javax.inject.Inject
 
 class MobileListFragment : DaggerFragment(), MobileListView,
@@ -27,7 +27,7 @@ class MobileListFragment : DaggerFragment(), MobileListView,
     private var mAdapter: MobileListAdapter? = null
     private var mainView: MainView? = null
 
-    fun setMainView(mainView:MainView){
+    fun setMainView(mainView: MainView) {
         this.mainView = mainView
     }
 

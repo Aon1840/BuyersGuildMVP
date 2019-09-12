@@ -6,13 +6,12 @@ import com.codemobiles.data.model.db.MobileEntity
 import com.codemobiles.data.network.ApiInterface
 import com.codemobiles.domain.model.MobileModel
 import com.codemobiles.domain.repository.MobileRepository
-import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.functions.BiFunction
 
 class MobileDataRepository constructor(
     private var apiManager: ApiInterface, var mobileEntityDataMapper: MobileEntityDataMapper, var mobileDao: MobileDAO
-) : MobileRepository{
+) : MobileRepository {
     override fun getPhoneList(): Observable<List<MobileModel>> {
         val api = apiManager.getPhones().map {
             mobileEntityDataMapper.transformApiToDataList(it)

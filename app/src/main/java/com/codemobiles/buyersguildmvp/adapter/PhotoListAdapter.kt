@@ -34,7 +34,7 @@ class PhotoListAdapter : RecyclerView.Adapter<PhotoHolder>() {
 
     override fun onBindViewHolder(holder: PhotoHolder, position: Int) {
         var urlImage: String = urlArray[position].url
-        if (!urlImage.startsWith("https://") && !urlImage.startsWith("http://")){
+        if (!urlImage.startsWith("https://") && !urlImage.startsWith("http://")) {
             urlImage = "https://$urlImage"
         }
         Glide.with(holder.itemView.context)

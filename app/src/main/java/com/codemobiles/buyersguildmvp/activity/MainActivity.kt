@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        sectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager,object: MainView {
+        sectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager, object : MainView {
             override fun removeFavourite(mobile: MobileModel) {
                 sectionsPagerAdapter?.favFragment?.removeFavourite(mobile)
             }
@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
             override fun addFavorite(mobile: MobileModel) {
                 sectionsPagerAdapter?.favFragment?.addFavorite(mobile)
             }
-        },object: MainView {
+        }, object : MainView {
             override fun removeFavourite(mobile: MobileModel) {
                 sectionsPagerAdapter?.listFragment?.removeFavourite(mobile)
             }

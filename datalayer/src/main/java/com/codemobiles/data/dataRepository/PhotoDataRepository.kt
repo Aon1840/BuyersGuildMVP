@@ -7,11 +7,12 @@ import com.codemobiles.domain.repository.PhotoRepository
 import io.reactivex.Observable
 
 class PhotoDataRepository constructor(
-    var apiManager: ApiInterface, var photoMapper: PhotoMapper) : PhotoRepository {
+    var apiManager: ApiInterface, var photoMapper: PhotoMapper
+) : PhotoRepository {
 
     override fun getPhoto(id: Int): Observable<List<PhotoListModel>> {
         return apiManager.getImageList(id).map { r ->
-             photoMapper.transformApiToDataList(r)
+            photoMapper.transformApiToDataList(r)
         }
     }
 }
