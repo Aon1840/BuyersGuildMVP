@@ -1,7 +1,9 @@
 package com.codemobiles.domain.model
 
-import java.io.Serializable
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class MobileModel (
     val brand: String,
     val description: String,
@@ -11,4 +13,4 @@ data class MobileModel (
     val rating: Double,
     val thumbImageURL: String,
     var fav:Boolean = false
-) : Serializable
+) : Parcelable

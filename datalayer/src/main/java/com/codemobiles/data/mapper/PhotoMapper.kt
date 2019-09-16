@@ -11,6 +11,6 @@ class PhotoMapper {
     }
 
     fun trasnformApiToData(data: PhotoListResponse): PhotoListModel {
-        return PhotoListModel(data.id, data.mobile_id, data.url)
+        return PhotoListModel(data.id, data.mobileId, data.url)
     }
 }

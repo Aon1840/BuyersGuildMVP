@@ -5,8 +5,8 @@ import com.codemobiles.buyersguildmvp.model.MobileResponse
 import com.codemobiles.data.model.db.MobileEntity
 import com.nhaarman.mockitokotlin2.mock
 import org.junit.Assert
-import org.junit.Test
 import org.junit.Before
+import org.junit.Test
 
 
 class MobileEntityDataMapperTest {
@@ -29,7 +29,14 @@ class MobileEntityDataMapperTest {
     @Test
     fun transformApiToDataList() {
         val dataArray = mobileEntityDataMapper.transformApiToDataList(mDataApiArray)
-        Assert.assertEquals(mDataApiArray,dataArray)
+        Assert.assertEquals(mDataApiArray[0].id,dataArray[0].id)
+        Assert.assertEquals(mDataApiArray[0].brand,dataArray[0].brand)
+        Assert.assertEquals(mDataApiArray[0].description,dataArray[0].description)
+        Assert.assertEquals(mDataApiArray[0].name,dataArray[0].name)
+        Assert.assertEquals(mDataApiArray[0].price,dataArray[0].price,3000.0)
+        Assert.assertEquals(mDataApiArray[0].rating,dataArray[0].rating,4.5)
+        Assert.assertEquals(mDataApiArray[0].thumbImageURL,dataArray[0].thumbImageURL)
+        Assert.assertEquals(mDataApiArray[0].fav,dataArray[0].fav)
     }
 
     @Test
@@ -48,7 +55,14 @@ class MobileEntityDataMapperTest {
     @Test
     fun transformDBToDataList() {
         val dataArray = mobileEntityDataMapper.transformDBToDataList(mDatabaseArray)
-        Assert.assertEquals(mDatabaseArray.size,dataArray.size)
+        Assert.assertEquals(mDataApiArray[0].id,dataArray[0].id)
+        Assert.assertEquals(mDataApiArray[0].brand,dataArray[0].brand)
+        Assert.assertEquals(mDataApiArray[0].description,dataArray[0].description)
+        Assert.assertEquals(mDataApiArray[0].name,dataArray[0].name)
+        Assert.assertEquals(mDataApiArray[0].price,dataArray[0].price,3000.0)
+        Assert.assertEquals(mDataApiArray[0].rating,dataArray[0].rating,4.5)
+        Assert.assertEquals(mDataApiArray[0].thumbImageURL,dataArray[0].thumbImageURL)
+        Assert.assertEquals(mDataApiArray[0].fav,dataArray[0].fav)
     }
 
     @Test

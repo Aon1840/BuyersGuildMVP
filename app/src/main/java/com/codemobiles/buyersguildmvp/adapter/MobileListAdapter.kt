@@ -4,6 +4,8 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.codemobiles.buyersguildmvp.INFORMATION
@@ -71,7 +73,7 @@ class MobileListAdapter(private val setHolder: Int, private val mobileAdapterInt
 
         Glide.with(holder.itemView.context)
             .load(mDataArray[position].thumbImageURL)
-            .into(holder.img_mobile)
+            .into(holder.imgMobile)
 
         if (like) {
             holder.favorite.setImageResource(R.drawable.ic_favourite_press)
@@ -101,7 +103,7 @@ class MobileListAdapter(private val setHolder: Int, private val mobileAdapterInt
         holder.price.alpha = 0.5f
         Glide.with(holder.itemView.context)
             .load(mDataArray[position].thumbImageURL)
-            .into(holder.img_mobile)
+            .into(holder.imgMobile)
 
         holder.rate.visibility = View.GONE
         holder.favorite.visibility = View.GONE
@@ -110,10 +112,10 @@ class MobileListAdapter(private val setHolder: Int, private val mobileAdapterInt
 }
 
 class PhoneItemHolder(view: View) : RecyclerView.ViewHolder(view) {
-    val name = view.txt_header
-    val favorite = view.image_favorite
-    val description = view.txt_description
-    val img_mobile = view.image_mobile
-    val rate = view.txt_rating
-    val price = view.txt_price
+    val name: TextView = view.txt_header
+    val favorite: ImageView = view.image_favorite
+    val description: TextView = view.txt_description
+    val imgMobile: ImageView = view.image_mobile
+    val rate: TextView = view.txt_rating
+    val price: TextView = view.txt_price
 }

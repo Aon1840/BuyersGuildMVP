@@ -25,10 +25,9 @@ class MobileEntityDataMapper {
     }
 
     fun transformDBToDataList(dataList: List<MobileEntity>): List<MobileModel> {
-
-          return dataList.map { mobileEntity ->
-              trasnformDBToData(mobileEntity)
-          }
+        return dataList.map { mobileEntity ->
+            trasnformDBToData(mobileEntity)
+        }
     }
 
     fun trasnformDBToData(data: MobileEntity): MobileModel {
