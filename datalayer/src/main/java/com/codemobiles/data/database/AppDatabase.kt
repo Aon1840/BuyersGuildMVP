@@ -40,9 +40,9 @@ abstract class AppDatabase : RoomDatabase() {
                     }
                 })
                     .allowMainThreadQueries().build().also {
-                    instance = it
-                    return instance!!
-                }
+                        instance = it
+                        return instance!!
+                    }
             }
         }
     }

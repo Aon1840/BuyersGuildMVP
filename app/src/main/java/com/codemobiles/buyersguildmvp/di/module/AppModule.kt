@@ -28,7 +28,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
-class AppModule{
+class AppModule {
 
     private val TIMEOUT = 30
 
@@ -88,55 +88,59 @@ class AppModule{
 
     @Provides
     @Singleton
-    internal fun provideMobileMapper() : MobileEntityDataMapper {
+    internal fun provideMobileMapper(): MobileEntityDataMapper {
         return MobileEntityDataMapper()
     }
 
     @Provides
     @Singleton
-    internal fun providePhotoMapper() : PhotoMapper {
+    internal fun providePhotoMapper(): PhotoMapper {
         return PhotoMapper()
     }
 
     @Provides
     @Singleton
-    internal fun provideMobileRepository(apiManager: ApiInterface, mobileEntityDataMapper: MobileEntityDataMapper, mobileDAO: MobileDAO) : MobileRepository {
+    internal fun provideMobileRepository(
+        apiManager: ApiInterface,
+        mobileEntityDataMapper: MobileEntityDataMapper,
+        mobileDAO: MobileDAO
+    ): MobileRepository {
         return MobileDataRepository(apiManager, mobileEntityDataMapper, mobileDAO)
     }
 
     @Provides
     @Singleton
-    internal fun providePhotoRepository(apiManager: ApiInterface, photoMapper: PhotoMapper) : PhotoRepository {
-        return PhotoDataRepository(apiManager,photoMapper)
+    internal fun providePhotoRepository(apiManager: ApiInterface, photoMapper: PhotoMapper): PhotoRepository {
+        return PhotoDataRepository(apiManager, photoMapper)
     }
 
     @Provides
     @Singleton
-    internal fun provideAddFavouriteUseCase(mobileRepository: MobileRepository) : AddFavouriteUseCase {
+    internal fun provideAddFavouriteUseCase(mobileRepository: MobileRepository): AddFavouriteUseCase {
         return AddFavouriteUseCase(mobileRepository)
     }
 
     @Provides
     @Singleton
-    internal fun provideRemoveFavouriteUseCase(mobileRepository: MobileRepository) : RemoveFavouriteUseCase {
+    internal fun provideRemoveFavouriteUseCase(mobileRepository: MobileRepository): RemoveFavouriteUseCase {
         return RemoveFavouriteUseCase(mobileRepository)
     }
 
     @Provides
     @Singleton
-    internal fun provideGetPhoneListUseCase(mobileRepository: MobileRepository) : GetPhoneListUseCase {
+    internal fun provideGetPhoneListUseCase(mobileRepository: MobileRepository): GetPhoneListUseCase {
         return GetPhoneListUseCase(mobileRepository)
     }
 
     @Provides
     @Singleton
-    internal fun provideGetPhoneFavouriteListUseCase(mobileRepository: MobileRepository) : GetPhoneFavouriteListUseCase {
+    internal fun provideGetPhoneFavouriteListUseCase(mobileRepository: MobileRepository): GetPhoneFavouriteListUseCase {
         return GetPhoneFavouriteListUseCase(mobileRepository)
     }
 
     @Provides
     @Singleton
-    internal fun provideGetPhotoUseCase(photoRepository: PhotoRepository) : GetPhotoUseCase {
+    internal fun provideGetPhotoUseCase(photoRepository: PhotoRepository): GetPhotoUseCase {
         return GetPhotoUseCase(photoRepository)
     }
 }

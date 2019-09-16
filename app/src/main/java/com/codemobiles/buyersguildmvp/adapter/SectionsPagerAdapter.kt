@@ -15,26 +15,26 @@ import com.codemobiles.presentation.view.MainView
 
 class SectionsPagerAdapter(
     private val fm: FragmentManager,
-    private val mainView: MainView,
-    private val mainView2: MainView
+    private val mobileListMainView: MainView,
+    private val favouriteMainView: MainView
 ) : FragmentPagerAdapter(fm) {
     var listFragment: FragmentView? = null
     var favFragment: FragmentView? = null
 
     private fun getListMobile(): ArrayList<MobileModel>? {
         val fragment = fm.fragments
-        fragment.forEach { fragment ->
-            if (fragment is MobileListFragment) {
-                return fragment.getFavData()
+        fragment.forEach { mobileList ->
+            if (mobileList is MobileListFragment) {
+                return mobileList.getFavData()
             }
         }
         return null
     }
 
     private fun getFavouriteListMobile(): ArrayList<MobileModel>? {
-        fm.fragments.forEach { fragment ->
-            if (fragment is FavouriteListFragment) {
-                return fragment.getFav()
+        fm.fragments.forEach { favouriteList ->
+            if (favouriteList is FavouriteListFragment) {
+                return favouriteList.getFav()
             }
         }
         return null
@@ -43,9 +43,9 @@ class SectionsPagerAdapter(
     fun setListMobile() {
         val mobile = getFavouriteListMobile()
         val fragment = fm.fragments
-        fragment.forEach { fragment ->
-            if (fragment is MobileListFragment) {
-                fragment.checkCurrentFav(mobile)
+        fragment.forEach { mobileList ->
+            if (mobileList is MobileListFragment) {
+                mobileList.checkCurrentFav(mobile)
             }
         }
     }
@@ -53,16 +53,16 @@ class SectionsPagerAdapter(
     fun setFavouriteMobile() {
         val favMobile = getListMobile()
         val fragment = fm.fragments
-        fragment.forEach { fragment ->
-            if (fragment is FavouriteListFragment) {
-                fragment.setDataFav(favMobile)
+        fragment.forEach { favouriteList ->
+            if (favouriteList is FavouriteListFragment) {
+                favouriteList.setDataFav(favMobile)
             }
         }
     }
 
     fun updateSortType(sortType: String) {
         val fragment = fm.fragments
-        fragment.forEach { fragment ->
+        fragment.forEach { _ ->
             if (fragment is BaseSortInterface) {
                 fragment.updateSortType(sortType)
             }
@@ -73,14 +73,14 @@ class SectionsPagerAdapter(
         return when (position) {
             0 -> {
                 val fragment = MobileListFragment().apply {
-                    this.setMainView(mainView)
+                    this.setMainView(mobileListMainView)
                 }
                 listFragment = fragment
                 fragment
             }
             else -> {
                 val fragment = FavouriteListFragment().apply {
-                    this.setMainView(mainView2)
+                    this.setMainView(favouriteMainView)
                 }
                 favFragment = fragment
                 fragment

@@ -5,11 +5,9 @@ import com.codemobiles.domain.model.PhotoListModel
 
 class PhotoMapper {
     fun transformApiToDataList(dataList: List<PhotoListResponse>): List<PhotoListModel> {
-        val itemArray = ArrayList<PhotoListModel>()
-        dataList.mapTo(itemArray) { item ->
-            trasnformApiToData(item)
+        return dataList.map { photoResponse ->
+            trasnformApiToData(photoResponse)
         }
-        return itemArray
     }
 
     fun trasnformApiToData(data: PhotoListResponse): PhotoListModel {

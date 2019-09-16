@@ -21,11 +21,11 @@ import javax.inject.Inject
 
 class DetailActivity : DaggerAppCompatActivity(), DetailVIew {
 
-    private var mData: MobileModel? = null
-    private var mAdapter: PhotoListAdapter? = null
-
     @Inject
     lateinit var mPresenter: DetailPresenter
+
+    private var mData: MobileModel? = null
+    private var mAdapter: PhotoListAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,28 +33,28 @@ class DetailActivity : DaggerAppCompatActivity(), DetailVIew {
         setupData()
     }
 
-    override fun setName(name: String) {
+    override fun setName(name: String?) {
         txt_detailName.text = name
     }
 
-    override fun setBrand(brand: String) {
+    override fun setBrand(brand: String?) {
         txt_detailBrand.text = brand
     }
 
-    override fun setPrice(price: String) {
+    override fun setPrice(price: String?) {
         txt_detailPrice.text = price
     }
 
-    override fun setDescription(description: String) {
+    override fun setDescription(description: String?) {
         txt_detailDescription.text = description
     }
 
-    override fun setRating(rating: String) {
+    override fun setRating(rating: String?) {
         txt_detailRating.text = rating
     }
 
-    override fun setImageList(imageList: ArrayList<PhotoListModel>) {
-        mAdapter?.sublistList(imageList)
+    override fun setImageList(imageList: ArrayList<PhotoListModel>?) {
+        imageList?.let { list -> mAdapter?.sublistList(list) }
     }
 
     private fun setupData() {
@@ -65,8 +65,8 @@ class DetailActivity : DaggerAppCompatActivity(), DetailVIew {
         detail_rcv.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
         mData = intent.extras?.getSerializable(INFORMATION) as MobileModel
-        mPresenter.getPassData(mData!!)
-        mPresenter.feedImageDetail(mData!!.id)
+        mPresenter.getPassData(mData)
+        mPresenter.feedImageDetail(mData?.id)
         detail_toolbar.setNavigationOnClickListener {
             finish()
         }

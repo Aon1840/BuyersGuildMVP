@@ -42,12 +42,12 @@ class MobileListAdapter(private val setHolder: Int, private val mobileAdapterInt
         } else {
             setFavoriteHolder(holder, position)
         }
-        holder.itemView.setOnClickListener {
+        holder.itemView.setOnClickListener { view ->
             val adapterPos = holder.adapterPosition
             if (adapterPos != RecyclerView.NO_POSITION) {
-                val intent = Intent(it.context, DetailActivity::class.java)
+                val intent = Intent(view.context, DetailActivity::class.java)
                 intent.putExtra(INFORMATION, mDataArray[position])
-                it.context.startActivity(intent)
+                view.context.startActivity(intent)
             }
         }
     }
@@ -66,8 +66,8 @@ class MobileListAdapter(private val setHolder: Int, private val mobileAdapterInt
         var like: Boolean = mDataArray[position].fav
         holder.name.text = mDataArray[position].name
         holder.description.text = mDataArray[position].description
-        holder.price.text = "Price: ${mDataArray[position].price.toString()}"
-        holder.rate.text = "Rating: ${mDataArray[position].rating.toString()}"
+        holder.price.text = "Price: ${mDataArray[position].price}"
+        holder.rate.text = "Rating: ${mDataArray[position].rating}"
 
         Glide.with(holder.itemView.context)
             .load(mDataArray[position].thumbImageURL)
@@ -96,8 +96,8 @@ class MobileListAdapter(private val setHolder: Int, private val mobileAdapterInt
 
     fun setFavoriteHolder(holder: PhoneItemHolder, position: Int) {
         holder.name.text = mDataArray[position].name
-        holder.description.text = "Price: ${mDataArray[position].price.toString()}"
-        holder.price.text = "Rating: ${mDataArray[position].rating.toString()}"
+        holder.description.text = "Price: ${mDataArray[position].price}"
+        holder.price.text = "Rating: ${mDataArray[position].rating}"
         holder.price.alpha = 0.5f
         Glide.with(holder.itemView.context)
             .load(mDataArray[position].thumbImageURL)

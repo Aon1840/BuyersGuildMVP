@@ -11,8 +11,8 @@ class PhotoDataRepository constructor(
 ) : PhotoRepository {
 
     override fun getPhoto(id: Int): Observable<List<PhotoListModel>> {
-        return apiManager.getImageList(id).map { r ->
-            photoMapper.transformApiToDataList(r)
+        return apiManager.getImageList(id).map { list ->
+            photoMapper.transformApiToDataList(list)
         }
     }
 }

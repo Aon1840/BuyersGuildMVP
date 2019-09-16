@@ -19,11 +19,12 @@ abstract class MobileFavouriteListModule {
 
     @Module
     companion object {
-        @JvmStatic @Provides
+        @JvmStatic
+        @Provides
 //        fun providePresenter(favouriteMobileDAO: MobileDAO): MobileFavouriteListPresenter {
 ////            return MobileFavouriteListPresenter(favouriteMobileDAO)
 ////        }
-        fun providePresenter(removeFavouriteUseCase: RemoveFavouriteUseCase) : MobileFavouriteListPresenter {
+        fun providePresenter(removeFavouriteUseCase: RemoveFavouriteUseCase): MobileFavouriteListPresenter {
             return MobileFavouriteListPresenter(removeFavouriteUseCase)
         }
     }

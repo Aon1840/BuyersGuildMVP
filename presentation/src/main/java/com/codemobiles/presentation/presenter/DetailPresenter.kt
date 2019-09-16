@@ -9,23 +9,23 @@ import io.reactivex.observers.DisposableObserver
 
 class DetailPresenter constructor(private var getPhotoUseCase: GetPhotoUseCase) : BasePresenter<DetailVIew>() {
 
-    fun getPassData(mobile: MobileModel) {
-        mView?.setName(mobile.name)
-        mView?.setBrand(mobile.brand)
-        mView?.setDescription(mobile.description)
-        mView?.setPrice(mobile.price.toString())
-        mView?.setRating(mobile.rating.toString())
+    fun getPassData(mobile: MobileModel?) {
+        mView?.setName(mobile?.name)
+        mView?.setBrand(mobile?.brand)
+        mView?.setDescription(mobile?.description)
+        mView?.setPrice(mobile?.price.toString())
+        mView?.setRating(mobile?.rating.toString())
     }
 
-    fun feedImageDetail(id: Int) {
+    fun feedImageDetail(id: Int?) {
         getPhotoUseCase.execute(object : DisposableObserver<List<PhotoListModel>>() {
             override fun onComplete() {
 
             }
 
             override fun onNext(photoResponse: List<PhotoListModel>) {
-                val detailImage: ArrayList<PhotoListModel> = arrayListOf()
-                detailImage.addAll(photoResponse)
+                val detailImage: ArrayList<PhotoListModel>? = arrayListOf()
+                detailImage?.addAll(photoResponse)
                 mView?.setImageList(detailImage)
             }
 
@@ -37,23 +37,3 @@ class DetailPresenter constructor(private var getPhotoUseCase: GetPhotoUseCase) 
         }, id)
     }
 }
-
-//apiManager.getImageList(id).subscribeOn(Schedulers.io())
-//.observeOn(AndroidSchedulers.mainThread())
-//.subscribe(object : Observer<List<PhotoListResponse>> {
-//    override fun onComplete() {
-//    }
-//
-//    override fun onSubscribe(d: Disposable) {
-//    }
-//
-//    override fun onNext(photoResponse: List<PhotoListResponse>) {
-//        val detailImage: ArrayList<PhotoListResponse> = arrayListOf()
-//        detailImage.addAll(photoResponse)
-//        mView?.setImageList(detailImage)
-//    }
-//
-//    override fun onError(e: Throwable) {
-//        e.printStackTrace()
-//    }
-//})

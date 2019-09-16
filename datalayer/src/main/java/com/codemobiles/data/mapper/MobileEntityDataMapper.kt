@@ -6,11 +6,9 @@ import com.codemobiles.domain.model.MobileModel
 
 class MobileEntityDataMapper {
     fun transformApiToDataList(dataList: List<MobileResponse>): List<MobileModel> {
-        val itemArray = ArrayList<MobileModel>()
-        dataList.mapTo(itemArray) { item ->
-            trasnformApiToData(item)
+        return dataList.map { mobileResponse ->
+            trasnformApiToData(mobileResponse)
         }
-        return itemArray
     }
 
     fun trasnformApiToData(data: MobileResponse): MobileModel {
@@ -27,14 +25,10 @@ class MobileEntityDataMapper {
     }
 
     fun transformDBToDataList(dataList: List<MobileEntity>): List<MobileModel> {
-//        val itemArray = ArrayList<MobileModel>()
-//        return dataList.mapTo(itemArray) {item ->
-//            trasnformDBToData(item)
-//        }
-          return dataList.map {
-              trasnformDBToData(it)
+
+          return dataList.map { mobileEntity ->
+              trasnformDBToData(mobileEntity)
           }
-//        return itemArray
     }
 
     fun trasnformDBToData(data: MobileEntity): MobileModel {

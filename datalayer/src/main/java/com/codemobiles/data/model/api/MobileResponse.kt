@@ -1,7 +1,9 @@
 package com.codemobiles.buyersguildmvp.model
 
-import java.io.Serializable
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class MobileResponse (
     val brand: String,
     val description: String,
@@ -11,4 +13,4 @@ data class MobileResponse (
     val rating: Double,
     val thumbImageURL: String,
     var fav:Boolean = false
-) : Serializable
+) : Parcelable

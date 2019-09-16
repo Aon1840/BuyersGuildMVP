@@ -1,5 +1,6 @@
 package com.codemobiles.data.dataRepository
 
+import android.annotation.SuppressLint
 import com.codemobiles.buyersguildmvp.database.MobileDAO
 import com.codemobiles.data.mapper.MobileEntityDataMapper
 import com.codemobiles.data.model.db.MobileEntity
@@ -35,11 +36,12 @@ class MobileDataRepository constructor(
     }
 
     override fun getPhoneFavouriteList(): Observable<List<MobileModel>> {
-        return Observable.just(mobileDao.queryFavorites()).map {
-            mobileEntityDataMapper.transformDBToDataList(it)
+        return Observable.just(mobileDao.queryFavorites()).map { list ->
+            mobileEntityDataMapper.transformDBToDataList(list)
         }
     }
 
+    @SuppressLint("CheckResult")
     override fun addFavourite(data: MobileModel): Observable<Int> {
         val item = MobileEntity(
             data.id,
@@ -51,11 +53,12 @@ class MobileDataRepository constructor(
             data.thumbImageURL,
             data.fav
         )
-//        return Observable.just(mobileDao.addFavorite(item))
+
         Observable.just(mobileDao.addFavorite(item))
         return Observable.just(0)
     }
 
+    @SuppressLint("CheckResult")
     override fun removeFavourite(data: MobileModel): Observable<Int> {
         val item = MobileEntity(
             data.id,
@@ -68,7 +71,6 @@ class MobileDataRepository constructor(
             data.fav
         )
 
-//        return Observable.just(mobileDao.deleteFavorite(item))
         Observable.just(mobileDao.deleteFavorite(item))
         return Observable.just(0)
     }

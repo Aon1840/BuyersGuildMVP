@@ -22,11 +22,18 @@ abstract class MobileListModule {
 //        fun providePresenter(apiInterface: ApiInterface, favouriteMobileDAO: MobileDAO): MobileListPresenter {
 //            return MobileListPresenter(apiInterface, favouriteMobileDAO)
 //        }
-        fun providePresenter(getPhoneListUseCase: GetPhoneListUseCase,
-                                      addFavouriteUseCase: AddFavouriteUseCase,
-                                      removeFavouriteUseCase: RemoveFavouriteUseCase,
-                                      getPhoneFavouriteListUseCase: GetPhoneFavouriteListUseCase) : MobileListPresenter {
-            return MobileListPresenter(getPhoneListUseCase,addFavouriteUseCase,removeFavouriteUseCase,getPhoneFavouriteListUseCase)
+        fun providePresenter(
+            getPhoneListUseCase: GetPhoneListUseCase,
+            addFavouriteUseCase: AddFavouriteUseCase,
+            removeFavouriteUseCase: RemoveFavouriteUseCase,
+            getPhoneFavouriteListUseCase: GetPhoneFavouriteListUseCase
+        ): MobileListPresenter {
+            return MobileListPresenter(
+                getPhoneListUseCase,
+                addFavouriteUseCase,
+                removeFavouriteUseCase,
+                getPhoneFavouriteListUseCase
+            )
         }
     }
 }

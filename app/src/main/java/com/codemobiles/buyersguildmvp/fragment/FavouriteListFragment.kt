@@ -24,14 +24,14 @@ import javax.inject.Inject
 class FavouriteListFragment : DaggerFragment(), FavouriteListView,
     BaseSortInterface, FragmentView {
 
-    private var mAdapter: MobileListAdapter? = null
-    private var mDataArrayFavourite: ArrayList<MobileModel> = arrayListOf()
-
     @Inject
     lateinit var mPresenter: MobileFavouriteListPresenter
+
+    private var mAdapter: MobileListAdapter? = null
+    private var mDataArrayFavourite: ArrayList<MobileModel> = arrayListOf()
     private var mainView: MainView? = null
 
-    fun setMainView(mainView: MainView){
+    fun setMainView(mainView: MainView) {
         this.mainView = mainView
     }
 
@@ -86,14 +86,14 @@ class FavouriteListFragment : DaggerFragment(), FavouriteListView,
     private fun setFavAdapter() {
         mAdapter = MobileListAdapter(1, object : MobileListAdapter.MobileAdapterInterface {
 
-            override fun addFavMobile(target: MobileModel) {}
+            override fun addFavMobile(mobile: MobileModel) {}
 
-            override fun removeFavMobile(target: MobileModel) {}
+            override fun removeFavMobile(mobile: MobileModel) {}
 
         })
     }
 
-    fun init(view: View) {
+    private fun init(view: View) {
         setFavAdapter()
         view.rcv_frgment.let { recyclerView ->
             recyclerView.adapter = mAdapter

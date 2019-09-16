@@ -14,7 +14,7 @@ import com.codemobiles.presentation.view.FragmentView
 import com.codemobiles.presentation.view.MainView
 import com.codemobiles.presentation.view.MobileListView
 import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.fragment_recyclerview.*
+import kotlinx.android.synthetic.main.fragment_recyclerview.rcv_frgment
 import javax.inject.Inject
 
 class MobileListFragment : DaggerFragment(), MobileListView,

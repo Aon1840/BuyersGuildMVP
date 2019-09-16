@@ -1,11 +1,10 @@
 package com.codemobiles.buyersguildmvp.database
 
 import androidx.room.Dao
-import androidx.room.Query
-import androidx.room.Insert
 import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.Query
 import com.codemobiles.data.model.db.MobileEntity
-import io.reactivex.Completable
 
 @Dao
 interface MobileDAO {

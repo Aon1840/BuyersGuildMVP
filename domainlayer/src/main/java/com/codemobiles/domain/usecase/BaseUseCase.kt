@@ -7,7 +7,7 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
 
-abstract class BaseUseCase<T, Params>  {
+abstract class BaseUseCase<T, Params> {
 
     private val compositeDisposable = CompositeDisposable()
 

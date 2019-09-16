@@ -2,7 +2,7 @@ package com.codemobiles.presentation.view
 
 import com.codemobiles.domain.model.MobileModel
 
-interface MainView{
+interface MainView {
     fun addFavorite(mobile: MobileModel)
     fun removeFavourite(mobile: MobileModel)
 }
