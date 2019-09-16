@@ -20,7 +20,7 @@ class MobileDataRepositoryTest {
     private var mobileEntityDataMapper = MobileEntityDataMapper()
     private var mobileDataRapository = MobileDataRepository(apiManager, mobileEntityDataMapper, mobileDao)
     private var mobileListApi = arrayListOf<MobileResponse>()
-    private var mobileListFavourite = ArrayList<MobileEntity>()
+    private var mobileListFavourite = arrayListOf<MobileEntity>()
     private var mobileModel: MobileModel = mock()
     private var mobileEntity: MobileEntity = mock()
 
