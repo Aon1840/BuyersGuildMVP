@@ -13,6 +13,7 @@ import io.reactivex.functions.BiFunction
 class MobileDataRepository constructor(
     private var apiManager: ApiInterface, var mobileEntityDataMapper: MobileEntityDataMapper, var mobileDao: MobileDAO
 ) : MobileRepository {
+
     override fun getPhoneList(): Observable<List<MobileModel>> {
         val api = apiManager.getPhones().map {
             mobileEntityDataMapper.transformApiToDataList(it)
