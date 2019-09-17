@@ -50,16 +50,6 @@ dependencies {
     // Room components
     implementation "androidx.room:room-runtime:2.1.0"
     kapt "androidx.room:room-compiler:2.1.0"
-
-    // Dagger 2
-    implementation 'com.google.dagger:dagger:2.22.1'
-    kapt 'com.google.dagger:dagger-compiler:2.22.1'
-
-    // For Android
-    implementation 'com.google.dagger:dagger-android:2.22.1'
-    implementation 'com.google.dagger:dagger-android-support:2.22.1'
-    kapt 'com.google.dagger:dagger-android-processor:2.22.1'
-
     // RxAndroid
     implementation "io.reactivex.rxjava2:rxandroid:2.0.2"
     implementation "com.squareup.retrofit2:adapter-rxjava2:2.4.0"
