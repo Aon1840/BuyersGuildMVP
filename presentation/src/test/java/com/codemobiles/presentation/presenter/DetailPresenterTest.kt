@@ -4,7 +4,10 @@ import com.codemobiles.domain.model.MobileModel
 import com.codemobiles.domain.model.PhotoListModel
 import com.codemobiles.domain.usecase.photoList.GetPhotoUseCase
 import com.codemobiles.presentation.view.DetailVIew
-import com.nhaarman.mockitokotlin2.*
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.argumentCaptor
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.verify
 import io.reactivex.Observable
 import io.reactivex.observers.DisposableObserver
 import org.junit.Before
@@ -17,13 +20,13 @@ class DetailPresenterTest {
     private var getPhotoUseCase: GetPhotoUseCase = mock()
     private var detailPresenter = DetailPresenter(getPhotoUseCase)
     private val photoListModel = arrayListOf<PhotoListModel>()
-    private val mobileModel = MobileModel("test","test",1,"test",3000.0,4.5,"test",false)
+    private val mobileModel = MobileModel("test", "test", 1, "test", 3000.0, 4.5, "test", false)
 
 
     @Before
     fun setUp() {
         detailPresenter.setView(view)
-        photoListModel.add(PhotoListModel(1,1,"test"))
+        photoListModel.add(PhotoListModel(1, 1, "test"))
         Mockito.`when`(getPhotoUseCase.getObservable(1)).thenReturn(Observable.just(photoListModel))
     }
 

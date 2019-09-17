@@ -401,6 +401,15 @@ class MobileListPresenterTest {
     }
 
     @Test
+    fun `feedMobileList complete`() {
+        Mockito.`when`(getPhoneListUseCase.getObservable(isNull())).thenReturn(null)
+        val argumentCaptor = argumentCaptor<DisposableObserver<List<MobileModel>>>()
+        mobileListPresenter.feedMobileList()
+        verify(getPhoneListUseCase).execute(argumentCaptor.capture(), isNull())
+        argumentCaptor.firstValue.onComplete()
+    }
+
+    @Test
     fun `sort by price low to high`() {
         mobileListPresenter.sortMobile(mArray, PRICE_LOWTOHIGH)
         verify(view).showMobileList(mArraySortByPriceLowToHight)
@@ -434,6 +443,24 @@ class MobileListPresenterTest {
     }
 
     @Test
+    fun `addFavoriteMobile fail`() {
+        Mockito.`when`(addFavouriteUseCase.getObservable(mData)).thenReturn(Observable.just(0))
+        val argumentCaptor = argumentCaptor<DisposableObserver<Int>>()
+        mobileListPresenter.addFavoriteMobile(mData)
+        verify(addFavouriteUseCase).execute(argumentCaptor.capture(), any())
+        argumentCaptor.firstValue.onError(Throwable())
+    }
+
+    @Test
+    fun `addFavoriteMobile complete`() {
+        Mockito.`when`(addFavouriteUseCase.getObservable(mData)).thenReturn(Observable.just(0))
+        val argumentCaptor = argumentCaptor<DisposableObserver<Int>>()
+        mobileListPresenter.addFavoriteMobile(mData)
+        verify(addFavouriteUseCase).execute(argumentCaptor.capture(), any())
+        argumentCaptor.firstValue.onComplete()
+    }
+
+    @Test
     fun removeFavoriteMobile() {
         Mockito.`when`(removeFavouriteUseCase.getObservable(mData)).thenReturn(Observable.just(0))
         val argumentCaptor = argumentCaptor<DisposableObserver<Int>>()
@@ -443,13 +470,32 @@ class MobileListPresenterTest {
     }
 
     @Test
+    fun `removeFavoriteMobile fail`() {
+        Mockito.`when`(removeFavouriteUseCase.getObservable(mData)).thenReturn(Observable.just(0))
+        val argumentCaptor = argumentCaptor<DisposableObserver<Int>>()
+        mobileListPresenter.removeFavoriteMobile(mData)
+        verify(removeFavouriteUseCase).execute(argumentCaptor.capture(), any())
+        argumentCaptor.firstValue.onError(Throwable())
+    }
+
+    @Test
+    fun `removeFavoriteMobile complete`() {
+        Mockito.`when`(removeFavouriteUseCase.getObservable(mData)).thenReturn(Observable.just(0))
+        val argumentCaptor = argumentCaptor<DisposableObserver<Int>>()
+        mobileListPresenter.removeFavoriteMobile(mData)
+        verify(removeFavouriteUseCase).execute(argumentCaptor.capture(), any())
+        argumentCaptor.firstValue.onComplete()
+    }
+
+    @Test
     fun getFavouriteMobile() {
         mobileListPresenter.getFavouriteMobile()
     }
 
     @Test
     fun checkFavourite() {
-        Mockito.`when`(getPhoneFavouriteListUseCase.getObservable(isNull())).thenReturn(Observable.just(mArrayFavourite))
+        Mockito.`when`(getPhoneFavouriteListUseCase.getObservable(isNull()))
+            .thenReturn(Observable.just(mArrayFavourite))
         val argumentCaptor = argumentCaptor<DisposableObserver<List<MobileModel>>>()
         mobileListPresenter.checkFavourite()
         verify(getPhoneFavouriteListUseCase).execute(argumentCaptor.capture(), isNull())
