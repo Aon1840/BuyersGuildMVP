@@ -23,18 +23,18 @@ class DetailPresenterTest {
     @Before
     fun setUp() {
         detailPresenter.setView(view)
-        Mockito.`when`(getPhotoUseCase.getObservable(1)).thenReturn(Observable.just(mock()))
         photoListModel.add(PhotoListModel(1,1,"test"))
+        Mockito.`when`(getPhotoUseCase.getObservable(1)).thenReturn(Observable.just(photoListModel))
     }
 
     @Test
     fun getPassData() {
         detailPresenter.getPassData(mobileModel)
-//        verify(view).setName(mobileModel.name)
-//        verify(view).setName(mobileModel.brand)
-//        verify(view).setName(mobileModel.description)
-//        verify(view).setName(mobileModel.price.toString())
-//        verify(view).setName(mobileModel.rating.toString())
+        verify(view).setName(mobileModel.name)
+        verify(view).setBrand(mobileModel.brand)
+        verify(view).setDescription(mobileModel.description)
+        verify(view).setPrice(mobileModel.price.toString())
+        verify(view).setRating(mobileModel.rating.toString())
     }
 
     @Test
@@ -49,9 +49,8 @@ class DetailPresenterTest {
     @Test
     fun `feedImageDetail fail`() {
         val argumentCaptor = argumentCaptor<DisposableObserver<List<PhotoListModel>>>()
-        detailPresenter.feedImageDetail(2)
+        detailPresenter.feedImageDetail(1)
         verify(getPhotoUseCase).execute(argumentCaptor.capture(), any())
         argumentCaptor.firstValue.onError(Throwable())
-        verify(view).setImageList(isNull())
     }
 }
