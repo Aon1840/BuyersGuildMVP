@@ -7,7 +7,7 @@ import com.codemobiles.presentation.view.DetailVIew
 import io.reactivex.observers.DisposableObserver
 
 
-class DetailPresenter constructor(private var getPhotoUseCase: GetPhotoUseCase) : BasePresenter<DetailVIew>() {
+class DetailPresenter constructor(private var getPhotoUseCase: GetPhotoUseCase) : BasePresenter<DetailVIew>()  {
 
     fun getPassData(mobile: MobileModel?) {
         mView?.setName(mobile?.name)

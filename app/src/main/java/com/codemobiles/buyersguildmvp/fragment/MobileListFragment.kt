@@ -13,11 +13,10 @@ import com.codemobiles.presentation.view.BaseSortInterface
 import com.codemobiles.presentation.view.FragmentView
 import com.codemobiles.presentation.view.MainView
 import com.codemobiles.presentation.view.MobileListView
-import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.fragment_recyclerview.rcv_frgment
+import kotlinx.android.synthetic.main.fragment_recyclerview.*
 import javax.inject.Inject
 
-class MobileListFragment : DaggerFragment(), MobileListView,
+class MobileListFragment : BaseFragment(), MobileListView,
     BaseSortInterface, FragmentView {
 
     @Inject
@@ -102,5 +101,9 @@ class MobileListFragment : DaggerFragment(), MobileListView,
 
     override fun removeFavourite(mobile: MobileModel) {
         mPresenter.removeFavoriteMobile(mobile)
+    }
+
+    override fun setErrorMessage() {
+
     }
 }

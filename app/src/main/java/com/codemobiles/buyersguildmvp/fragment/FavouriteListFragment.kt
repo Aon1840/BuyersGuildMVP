@@ -10,18 +10,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.codemobiles.buyersguildmvp.R
 import com.codemobiles.buyersguildmvp.adapter.MobileListAdapter
-import com.codemobiles.presentation.view.BaseSortInterface
-import com.codemobiles.presentation.view.FavouriteListView
 import com.codemobiles.domain.model.MobileModel
 import com.codemobiles.presentation.presenter.MobileFavouriteListPresenter
+import com.codemobiles.presentation.view.BaseSortInterface
+import com.codemobiles.presentation.view.FavouriteListView
 import com.codemobiles.presentation.view.FragmentView
 import com.codemobiles.presentation.view.MainView
-import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.fragment_recyclerview.view.rcv_frgment
+import kotlinx.android.synthetic.main.fragment_recyclerview.view.*
 import javax.inject.Inject
 
 
-class FavouriteListFragment : DaggerFragment(), FavouriteListView,
+class FavouriteListFragment : BaseFragment(), FavouriteListView,
     BaseSortInterface, FragmentView {
 
     @Inject
@@ -121,5 +120,9 @@ class FavouriteListFragment : DaggerFragment(), FavouriteListView,
 
     override fun favoriteRemoveComplete(mobile: MobileModel) {
         mainView?.removeFavourite(mobile)
+    }
+
+    override fun setErrorMessage() {
+
     }
 }

@@ -9,7 +9,6 @@ import com.codemobiles.presentation.view.DetailVIew
 import com.codemobiles.domain.model.MobileModel
 import com.codemobiles.domain.model.PhotoListModel
 import com.codemobiles.presentation.presenter.DetailPresenter
-import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_mobile_detail.txt_detailName
 import kotlinx.android.synthetic.main.activity_mobile_detail.txt_detailBrand
 import kotlinx.android.synthetic.main.activity_mobile_detail.txt_detailPrice
@@ -19,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_mobile_detail.detail_rcv
 import kotlinx.android.synthetic.main.activity_mobile_detail.detail_toolbar
 import javax.inject.Inject
 
-class DetailActivity : DaggerAppCompatActivity(), DetailVIew {
+class DetailActivity : BaseActivity(), DetailVIew {
 
     @Inject
     lateinit var mPresenter: DetailPresenter
@@ -55,6 +54,11 @@ class DetailActivity : DaggerAppCompatActivity(), DetailVIew {
 
     override fun setImageList(imageList: ArrayList<PhotoListModel>?) {
         imageList?.let { list -> mAdapter?.sublistList(list) }
+    }
+
+
+    override fun setErrorMessage() {
+
     }
 
     private fun setupData() {
