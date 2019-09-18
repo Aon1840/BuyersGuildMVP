@@ -19,23 +19,37 @@ class MobileDataRepositoryTest {
     private var mobileDao: MobileDAO = mock()
     private var mobileEntityDataMapper = MobileEntityDataMapper()
     private var mobileDataRapository = MobileDataRepository(apiManager, mobileEntityDataMapper, mobileDao)
-    private var mobileListApi = arrayListOf<MobileResponse>()
+    private var mobileListApi = arrayListOf<MobileModel>()
+    private var mobileListApiResponse = arrayListOf<MobileResponse>()
     private var mobileListFavourite = arrayListOf<MobileEntity>()
     private var mobileModel: MobileModel = mock()
     private var mobileEntity: MobileEntity = mock()
 
     @Before
     fun setUp() {
-        mobileListApi.add(MobileResponse("test", "test", 1, "test", 3000.0, 4.5, "https://www.google.com", false))
+        mobileListApi.add(MobileModel("test", "test", 1, "test", 3000.0, 4.5, "https://www.google.com", false))
+        mobileListApiResponse.add(
+            MobileResponse(
+                "test",
+                "test",
+                1,
+                "test",
+                3000.0,
+                4.5,
+                "https://www.google.com",
+                false
+            )
+        )
         mobileListFavourite.add(MobileEntity(1, "test", "test", "test", 3000.0, 4.5, "https://www.google.com", true))
         mobileModel = MobileModel("test", "test", 2, "test", 3000.0, 4.5, "https://www.google.com", true)
         mobileEntity = MobileEntity(2, "test", "test", "test", 3000.0, 4.5, "https://www.google.com", true)
-        Mockito.`when`(apiManager.getPhones()).thenReturn(Observable.just(mobileListApi))
+        Mockito.`when`(apiManager.getPhones()).thenReturn(Observable.just(mobileListApiResponse))
         Mockito.`when`(mobileDao.queryFavorites()).thenReturn(mobileListFavourite)
     }
 
     @Test
     fun getPhoneList() {
+//        whenever(mobileDataRapository.getPhoneList()).thenReturn(Observable.just(mobileListApi))
         mobileDataRapository.getPhoneList()
         verify(apiManager).getPhones()
         verify(mobileDao).queryFavorites()

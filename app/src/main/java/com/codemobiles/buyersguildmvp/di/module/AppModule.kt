@@ -1,9 +1,14 @@
 package com.codemobiles.buyersguildmvp.di.module
 
 import android.app.Application
+import android.util.Log
+import androidx.room.Room
+import androidx.room.RoomDatabase
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.codemobiles.buyersguildmvp.application.MyApplication
 import com.codemobiles.buyersguildmvp.database.AppDatabase
 import com.codemobiles.buyersguildmvp.database.MobileDAO
+import com.codemobiles.data.DATABASE_NAME
 import com.codemobiles.data.dataRepository.MobileDataRepository
 import com.codemobiles.data.dataRepository.PhotoDataRepository
 import com.codemobiles.data.mapper.MobileEntityDataMapper
@@ -76,14 +81,14 @@ class AppModule {
 
     @Provides
     @Singleton
-    internal fun provideFavouriteMobileDAO(app: Application): MobileDAO {
-        //set up database
-        val mDatabaseAdapter = app.let {
-            AppDatabase.getInstance(it).apply {
-                openHelper.readableDatabase
-            }
-        }
-        return mDatabaseAdapter.favoriteDao()
+    internal fun provideAppDatabase(app: Application): AppDatabase {
+        return Room.databaseBuilder(app, AppDatabase::class.java, DATABASE_NAME).allowMainThreadQueries().build()
+    }
+
+    @Provides
+    @Singleton
+    internal fun provideFavouriteMobileDAO(appDatabase: AppDatabase): MobileDAO {
+        return appDatabase.favoriteDao()
     }
 
     @Provides
