@@ -1,3 +1,5 @@
 package com.codemobiles.presentation.view
 
-interface BaseView
+interface BaseView {
+    fun showErrorMessage(errorMessage: String)
+}

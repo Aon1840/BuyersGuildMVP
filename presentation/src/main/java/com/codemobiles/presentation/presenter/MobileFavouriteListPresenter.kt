@@ -24,7 +24,7 @@ class MobileFavouriteListPresenter constructor(private val removeFavouriteUseCas
             }
 
             override fun onError(e: Throwable) {
-
+                mView?.showErrorMessage(e.message.toString())
             }
 
         }, mobileListFav[position])

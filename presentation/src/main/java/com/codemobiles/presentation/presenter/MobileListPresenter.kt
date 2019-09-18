@@ -1,5 +1,6 @@
 package com.codemobiles.presentation.presenter
 
+import android.util.Log
 import com.codemobiles.domain.model.MobileModel
 import com.codemobiles.domain.usecase.favorite.AddFavouriteUseCase
 import com.codemobiles.domain.usecase.favorite.RemoveFavouriteUseCase
@@ -38,7 +39,7 @@ class MobileListPresenter constructor(
             }
 
             override fun onError(e: Throwable) {
-
+                mView?.showErrorMessage(e.message.toString())
             }
 
         }, null)

@@ -1,6 +1,7 @@
 package com.codemobiles.buyersguildmvp.activity
 
 import android.os.Bundle
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.codemobiles.buyersguildmvp.INFORMATION
 import com.codemobiles.buyersguildmvp.R
@@ -18,7 +19,7 @@ import kotlinx.android.synthetic.main.activity_mobile_detail.detail_rcv
 import kotlinx.android.synthetic.main.activity_mobile_detail.detail_toolbar
 import javax.inject.Inject
 
-class DetailActivity : BaseActivity(), DetailVIew {
+class DetailActivity : BaseActivity(), DetailVIew{
 
     @Inject
     lateinit var mPresenter: DetailPresenter
@@ -57,10 +58,6 @@ class DetailActivity : BaseActivity(), DetailVIew {
     }
 
 
-    override fun setErrorMessage() {
-
-    }
-
     private fun setupData() {
         mPresenter.setView(this)
         mAdapter = PhotoListAdapter()
@@ -74,5 +71,9 @@ class DetailActivity : BaseActivity(), DetailVIew {
         detail_toolbar.setNavigationOnClickListener {
             finish()
         }
+    }
+
+    override fun getViewId(): View {
+        return window.decorView.findViewById(R.id.mobile_detail)
     }
 }

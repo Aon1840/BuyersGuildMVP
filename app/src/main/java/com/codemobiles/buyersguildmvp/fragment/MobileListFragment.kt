@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.codemobiles.buyersguildmvp.R
 import com.codemobiles.buyersguildmvp.adapter.MobileListAdapter
 import com.codemobiles.domain.model.MobileModel
 import com.codemobiles.presentation.presenter.MobileListPresenter
@@ -31,7 +32,7 @@ class MobileListFragment : BaseFragment(), MobileListView,
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(com.codemobiles.buyersguildmvp.R.layout.fragment_recyclerview, container, false)
+        val view = inflater.inflate(R.layout.fragment_recyclerview, container, false)
         mPresenter.setView(this)
         return view
     }
@@ -103,7 +104,8 @@ class MobileListFragment : BaseFragment(), MobileListView,
         mPresenter.removeFavoriteMobile(mobile)
     }
 
-    override fun setErrorMessage() {
-
+    override fun getViewId(): View? {
+        return view
     }
+
 }

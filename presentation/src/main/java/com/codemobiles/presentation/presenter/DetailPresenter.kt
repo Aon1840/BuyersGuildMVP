@@ -30,7 +30,7 @@ class DetailPresenter constructor(private var getPhotoUseCase: GetPhotoUseCase) 
             }
 
             override fun onError(e: Throwable) {
-
+                mView?.showErrorMessage(e.message.toString())
             }
 
 

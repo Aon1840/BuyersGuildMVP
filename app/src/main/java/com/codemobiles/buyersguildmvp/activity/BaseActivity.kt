@@ -1,11 +1,19 @@
 package com.codemobiles.buyersguildmvp.activity
 
-import android.widget.Toast
-import com.codemobiles.presentation.view.HandleError
+import android.view.View
+import com.codemobiles.presentation.view.BaseView
+import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.DaggerAppCompatActivity
 
-abstract class BaseActivity : DaggerAppCompatActivity(), HandleError {
-    override fun setErrorMessage() {
-        Toast.makeText(this,"Error to fetch data!",Toast.LENGTH_LONG)
+abstract class BaseActivity : DaggerAppCompatActivity(), BaseView {
+
+    abstract fun getViewId(): View
+
+    override fun showErrorMessage(errorMessage: String) {
+        Snackbar.make(
+            getViewId(),
+            errorMessage,
+            Snackbar.LENGTH_LONG
+        ).show()
     }
 }
