@@ -122,7 +122,7 @@ class FavouriteListFragment : BaseFragment(), FavouriteListView,
         mainView?.removeFavourite(mobile)
     }
 
-    override fun getViewId(): View {
-        return view!!
+    override fun getViewFragment(): View? {
+        return view
     }
 }

@@ -7,11 +7,11 @@ import dagger.android.support.DaggerAppCompatActivity
 
 abstract class BaseActivity : DaggerAppCompatActivity(), BaseView {
 
-    abstract fun getViewId(): View
+    abstract fun getView(): View
 
     override fun showErrorMessage(errorMessage: String) {
         Snackbar.make(
-            getViewId(),
+            getView(),
             errorMessage,
             Snackbar.LENGTH_LONG
         ).show()

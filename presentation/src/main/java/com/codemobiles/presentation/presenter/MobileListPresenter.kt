@@ -85,7 +85,9 @@ class MobileListPresenter constructor(
                 mView?.favoriteAddComplete(mobile)
             }
 
-            override fun onError(e: Throwable) {}
+            override fun onError(e: Throwable) {
+                mView?.showErrorMessage(e.message.toString())
+            }
 
         }, mobile)
     }
@@ -100,7 +102,9 @@ class MobileListPresenter constructor(
                 mView?.favoriteRemoveComplete(mobile)
             }
 
-            override fun onError(e: Throwable) {}
+            override fun onError(e: Throwable) {
+                mView?.showErrorMessage(e.message.toString())
+            }
 
         }, mobile)
     }
@@ -121,7 +125,9 @@ class MobileListPresenter constructor(
                 mDataArray.addAll(data)
             }
 
-            override fun onError(e: Throwable) {}
+            override fun onError(e: Throwable) {
+                mView?.showErrorMessage(e.message.toString())
+            }
 
         }, null)
     }

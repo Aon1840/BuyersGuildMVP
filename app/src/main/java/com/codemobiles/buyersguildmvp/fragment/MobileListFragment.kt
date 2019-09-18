@@ -104,7 +104,7 @@ class MobileListFragment : BaseFragment(), MobileListView,
         mPresenter.removeFavoriteMobile(mobile)
     }
 
-    override fun getViewId(): View? {
+    override fun getViewFragment(): View? {
         return view
     }
 

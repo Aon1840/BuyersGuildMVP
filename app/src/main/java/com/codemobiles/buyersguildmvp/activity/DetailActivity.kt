@@ -73,7 +73,7 @@ class DetailActivity : BaseActivity(), DetailVIew{
         }
     }
 
-    override fun getViewId(): View {
+    override fun getView(): View {
         return window.decorView.findViewById(R.id.mobile_detail)
     }
 }
