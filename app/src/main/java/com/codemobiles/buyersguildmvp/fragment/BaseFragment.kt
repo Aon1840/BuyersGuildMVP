@@ -8,12 +8,12 @@ import dagger.android.support.DaggerFragment
 
 abstract class BaseFragment : DaggerFragment(), BaseView {
 
-    abstract fun getViewFragment(): View?
+    abstract fun getRootView(): View?
 
     override fun showErrorMessage(errorMessage: String) {
-        getViewFragment()?.let {
+        getRootView()?.let { view ->
             Snackbar.make(
-                it,
+                view,
                 errorMessage,
                 Snackbar.LENGTH_LONG
             ).show()
