@@ -2,7 +2,7 @@ package com.codemobiles.presentation.view
 
 import com.codemobiles.domain.model.PhotoListModel
 
-interface DetailVIew : BaseView {
+interface DetailView : BaseView {
     fun setName(name: String?)
     fun setBrand(brand: String?)
     fun setPrice(price: String?)

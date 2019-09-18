@@ -16,7 +16,7 @@ import com.codemobiles.presentation.view.BaseSortInterface
 import com.codemobiles.presentation.view.FavouriteListView
 import com.codemobiles.presentation.view.FragmentView
 import com.codemobiles.presentation.view.MainView
-import kotlinx.android.synthetic.main.fragment_recyclerview.view.*
+import kotlinx.android.synthetic.main.fragment_recyclerview.view.rcv_frgment
 import javax.inject.Inject
 
 

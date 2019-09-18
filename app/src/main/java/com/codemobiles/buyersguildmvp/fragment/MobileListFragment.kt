@@ -14,7 +14,7 @@ import com.codemobiles.presentation.view.BaseSortInterface
 import com.codemobiles.presentation.view.FragmentView
 import com.codemobiles.presentation.view.MainView
 import com.codemobiles.presentation.view.MobileListView
-import kotlinx.android.synthetic.main.fragment_recyclerview.*
+import kotlinx.android.synthetic.main.fragment_recyclerview.rcv_frgment
 import javax.inject.Inject
 
 class MobileListFragment : BaseFragment(), MobileListView,

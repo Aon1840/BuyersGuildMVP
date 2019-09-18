@@ -19,9 +19,6 @@ abstract class MobileListModule {
     companion object {
         @JvmStatic
         @Provides
-//        fun providePresenter(apiInterface: ApiInterface, favouriteMobileDAO: MobileDAO): MobileListPresenter {
-//            return MobileListPresenter(apiInterface, favouriteMobileDAO)
-//        }
         fun providePresenter(
             getPhoneListUseCase: GetPhoneListUseCase,
             addFavouriteUseCase: AddFavouriteUseCase,

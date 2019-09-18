@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class MobileResponse (
+data class MobileResponse(
     val brand: String,
     val description: String,
     val id: Int,
@@ -12,5 +12,5 @@ data class MobileResponse (
     val price: Double,
     val rating: Double,
     val thumbImageURL: String,
-    var fav:Boolean = false
+    var fav: Boolean = false
 ) : Parcelable

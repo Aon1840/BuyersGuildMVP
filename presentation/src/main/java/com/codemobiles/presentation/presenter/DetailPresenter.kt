@@ -3,11 +3,11 @@ package com.codemobiles.presentation.presenter
 import com.codemobiles.domain.model.MobileModel
 import com.codemobiles.domain.model.PhotoListModel
 import com.codemobiles.domain.usecase.photoList.GetPhotoUseCase
-import com.codemobiles.presentation.view.DetailVIew
+import com.codemobiles.presentation.view.DetailView
 import io.reactivex.observers.DisposableObserver
 
 
-class DetailPresenter constructor(private var getPhotoUseCase: GetPhotoUseCase) : BasePresenter<DetailVIew>()  {
+class DetailPresenter constructor(private var getPhotoUseCase: GetPhotoUseCase) : BasePresenter<DetailView>() {
 
     fun getPassData(mobile: MobileModel?) {
         mView?.setName(mobile?.name)

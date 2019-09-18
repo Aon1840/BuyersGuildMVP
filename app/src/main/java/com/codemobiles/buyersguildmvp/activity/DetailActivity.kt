@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.codemobiles.buyersguildmvp.INFORMATION
 import com.codemobiles.buyersguildmvp.R
 import com.codemobiles.buyersguildmvp.adapter.PhotoListAdapter
-import com.codemobiles.presentation.view.DetailVIew
 import com.codemobiles.domain.model.MobileModel
 import com.codemobiles.domain.model.PhotoListModel
 import com.codemobiles.presentation.presenter.DetailPresenter
+import com.codemobiles.presentation.view.DetailView
 import kotlinx.android.synthetic.main.activity_mobile_detail.txt_detailName
 import kotlinx.android.synthetic.main.activity_mobile_detail.txt_detailBrand
 import kotlinx.android.synthetic.main.activity_mobile_detail.txt_detailPrice
@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.activity_mobile_detail.detail_rcv
 import kotlinx.android.synthetic.main.activity_mobile_detail.detail_toolbar
 import javax.inject.Inject
 
-class DetailActivity : BaseActivity(), DetailVIew{
+class DetailActivity : BaseActivity(), DetailView {
 
     @Inject
     lateinit var mPresenter: DetailPresenter
