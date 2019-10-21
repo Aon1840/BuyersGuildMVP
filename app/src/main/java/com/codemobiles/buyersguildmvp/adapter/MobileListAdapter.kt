@@ -64,7 +64,7 @@ class MobileListAdapter(private val setHolder: Int, private val mobileAdapterInt
         notifyDataSetChanged()
     }
 
-    fun setMobileListHoler(holder: PhoneItemHolder, position: Int) {
+    private fun setMobileListHoler(holder: PhoneItemHolder, position: Int) {
         var like: Boolean = mDataArray[position].fav
         holder.name.text = mDataArray[position].name
         holder.description.text = mDataArray[position].description
@@ -96,7 +96,7 @@ class MobileListAdapter(private val setHolder: Int, private val mobileAdapterInt
         }
     }
 
-    fun setFavoriteHolder(holder: PhoneItemHolder, position: Int) {
+    private fun setFavoriteHolder(holder: PhoneItemHolder, position: Int) {
         holder.name.text = mDataArray[position].name
         holder.description.text = "Price: ${mDataArray[position].price}"
         holder.price.text = "Rating: ${mDataArray[position].rating}"

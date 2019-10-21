@@ -1,4 +1,4 @@
-package com.codemobiles.buyersguildmvp.model
+package com.codemobiles.data.model.api
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

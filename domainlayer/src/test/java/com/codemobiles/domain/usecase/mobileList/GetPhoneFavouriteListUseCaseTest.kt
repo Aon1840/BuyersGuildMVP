@@ -11,12 +11,11 @@ import org.junit.Test
 class GetPhoneFavouriteListUseCaseTest {
 
     private var mobileRepository: MobileRepository = mock()
-    private var getPhoneFavouriteListUseCase: GetPhoneFavouriteListUseCase = mock()
+    private var getPhoneFavouriteListUseCase = GetPhoneFavouriteListUseCase(mobileRepository)
     private var dataList = arrayListOf<MobileModel>()
 
     @Before
     fun setUp() {
-        getPhoneFavouriteListUseCase = GetPhoneFavouriteListUseCase(mobileRepository)
         dataList.add(MobileModel("test", "test", 1, "test", 30.5, 4.5, "test", false))
     }
 

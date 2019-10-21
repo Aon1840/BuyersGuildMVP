@@ -10,13 +10,14 @@ import com.codemobiles.domain.model.MobileModel
 import com.codemobiles.domain.model.PhotoListModel
 import com.codemobiles.presentation.presenter.DetailPresenter
 import com.codemobiles.presentation.view.DetailView
-import kotlinx.android.synthetic.main.activity_mobile_detail.txt_detailName
-import kotlinx.android.synthetic.main.activity_mobile_detail.txt_detailBrand
-import kotlinx.android.synthetic.main.activity_mobile_detail.txt_detailPrice
-import kotlinx.android.synthetic.main.activity_mobile_detail.txt_detailDescription
-import kotlinx.android.synthetic.main.activity_mobile_detail.txt_detailRating
 import kotlinx.android.synthetic.main.activity_mobile_detail.detail_rcv
 import kotlinx.android.synthetic.main.activity_mobile_detail.detail_toolbar
+import kotlinx.android.synthetic.main.activity_mobile_detail.mobile_detail
+import kotlinx.android.synthetic.main.activity_mobile_detail.txt_detailBrand
+import kotlinx.android.synthetic.main.activity_mobile_detail.txt_detailDescription
+import kotlinx.android.synthetic.main.activity_mobile_detail.txt_detailName
+import kotlinx.android.synthetic.main.activity_mobile_detail.txt_detailPrice
+import kotlinx.android.synthetic.main.activity_mobile_detail.txt_detailRating
 import javax.inject.Inject
 
 class DetailActivity : BaseActivity(), DetailView {
@@ -74,6 +75,6 @@ class DetailActivity : BaseActivity(), DetailView {
     }
 
     override fun getView(): View {
-        return window.decorView.findViewById(R.id.mobile_detail)
+        return mobile_detail
     }
 }

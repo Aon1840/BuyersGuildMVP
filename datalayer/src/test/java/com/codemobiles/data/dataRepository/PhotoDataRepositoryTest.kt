@@ -1,6 +1,6 @@
 package com.codemobiles.data.dataRepository
 
-import com.codemobiles.buyersguildmvp.model.PhotoListResponse
+import com.codemobiles.data.model.api.PhotoListResponse
 import com.codemobiles.data.mapper.PhotoMapper
 import com.codemobiles.data.network.ApiInterface
 import com.nhaarman.mockitokotlin2.mock

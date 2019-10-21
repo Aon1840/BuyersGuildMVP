@@ -16,7 +16,11 @@ import kotlinx.android.synthetic.main.activity_main.main_tab
 
 class MainActivity : AppCompatActivity() {
 
-    var currentPage: Int = 0
+    companion object{
+        private const val MOBILE_LIST_PAGE = 0
+        private const val FAVORITE_LIST_PAGE = 1
+    }
+    var currentPage: Int = MOBILE_LIST_PAGE
     var sectionsPagerAdapter: SectionsPagerAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,12 +54,12 @@ class MainActivity : AppCompatActivity() {
 
             override fun onPageSelected(position: Int) {
                 when (position) {
-                    0 -> {
-                        currentPage = 0
+                    MOBILE_LIST_PAGE -> {
+                        currentPage = MOBILE_LIST_PAGE
                         sectionsPagerAdapter?.setListMobile()
                     }
                     else -> {
-                        currentPage = 1
+                        currentPage = FAVORITE_LIST_PAGE
                         sectionsPagerAdapter?.setFavouriteMobile()
                     }
                 }

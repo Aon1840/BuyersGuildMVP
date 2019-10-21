@@ -5,20 +5,14 @@ import com.codemobiles.domain.repository.MobileRepository
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import io.reactivex.Observable
-import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers
 
 class AddFavouriteUseCaseTest {
 
     private var mobileRepository: MobileRepository = mock()
-    private var addFavouriteUseCase: AddFavouriteUseCase = mock()
+    private var addFavouriteUseCase = AddFavouriteUseCase(mobileRepository)
     private var mobile: MobileModel = mock()
-
-    @Before
-    fun setUp() {
-        addFavouriteUseCase = AddFavouriteUseCase(mobileRepository)
-    }
 
     @Test
     fun getObservable() {

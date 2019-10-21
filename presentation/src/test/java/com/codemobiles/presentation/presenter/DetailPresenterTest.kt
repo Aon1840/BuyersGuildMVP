@@ -3,7 +3,7 @@ package com.codemobiles.presentation.presenter
 import com.codemobiles.domain.model.MobileModel
 import com.codemobiles.domain.model.PhotoListModel
 import com.codemobiles.domain.usecase.photoList.GetPhotoUseCase
-import com.codemobiles.presentation.view.DetailVIew
+import com.codemobiles.presentation.view.DetailView
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.argumentCaptor
 import com.nhaarman.mockitokotlin2.mock
@@ -16,7 +16,7 @@ import org.mockito.Mockito
 
 class DetailPresenterTest {
 
-    private var view: DetailVIew = mock()
+    private var view: DetailView = mock()
     private var getPhotoUseCase: GetPhotoUseCase = mock()
     private var detailPresenter = DetailPresenter(getPhotoUseCase)
     private val photoListModel = arrayListOf<PhotoListModel>()

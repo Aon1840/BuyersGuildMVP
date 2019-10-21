@@ -1,6 +1,6 @@
 package com.codemobiles.data.mapper
 
-import com.codemobiles.buyersguildmvp.model.MobileResponse
+import com.codemobiles.data.model.api.MobileResponse
 import com.codemobiles.data.model.db.MobileEntity
 import com.codemobiles.domain.model.MobileModel
 

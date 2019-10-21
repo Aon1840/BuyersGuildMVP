@@ -1,7 +1,7 @@
 package com.codemobiles.data.mapper
 
 
-import com.codemobiles.buyersguildmvp.model.MobileResponse
+import com.codemobiles.data.model.api.MobileResponse
 import com.codemobiles.data.model.db.MobileEntity
 import com.nhaarman.mockitokotlin2.mock
 import org.junit.Assert

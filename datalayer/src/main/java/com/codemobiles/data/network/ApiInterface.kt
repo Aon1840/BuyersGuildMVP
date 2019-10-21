@@ -1,7 +1,7 @@
 package com.codemobiles.data.network
 
-import com.codemobiles.buyersguildmvp.model.MobileResponse
-import com.codemobiles.buyersguildmvp.model.PhotoListResponse
+import com.codemobiles.data.model.api.MobileResponse
+import com.codemobiles.data.model.api.PhotoListResponse
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path

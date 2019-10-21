@@ -1,6 +1,6 @@
 package com.codemobiles.data.mapper
 
-import com.codemobiles.buyersguildmvp.model.PhotoListResponse
+import com.codemobiles.data.model.api.PhotoListResponse
 import com.codemobiles.domain.model.PhotoListModel
 
 class PhotoMapper {

@@ -1,6 +1,6 @@
 package com.codemobiles.data.mapper
 
-import com.codemobiles.buyersguildmvp.model.PhotoListResponse
+import com.codemobiles.data.model.api.PhotoListResponse
 import com.nhaarman.mockitokotlin2.mock
 import org.junit.Assert
 import org.junit.Before

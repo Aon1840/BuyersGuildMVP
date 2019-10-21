@@ -5,20 +5,15 @@ import com.codemobiles.domain.repository.MobileRepository
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import io.reactivex.Observable
-import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers.anyInt
 
 class RemoveFavouriteUseCaseTest {
 
     private var mobileRepository: MobileRepository = mock()
-    private var removeFavouriteUseCase: RemoveFavouriteUseCase = mock()
+    private var removeFavouriteUseCase = RemoveFavouriteUseCase(mobileRepository)
     private var mobile: MobileModel = mock()
 
-    @Before
-    fun setUp() {
-        removeFavouriteUseCase = RemoveFavouriteUseCase(mobileRepository)
-    }
 
     @Test
     fun getObservable() {

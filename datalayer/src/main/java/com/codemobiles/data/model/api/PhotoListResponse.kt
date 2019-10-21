@@ -1,4 +1,4 @@
-package com.codemobiles.buyersguildmvp.model
+package com.codemobiles.data.model.api
 
 import com.google.gson.annotations.SerializedName
 

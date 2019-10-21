@@ -11,12 +11,11 @@ import org.junit.Test
 class GetPhotoUseCaseTest {
 
     private var photoRepository: PhotoRepository = mock()
-    private var getPhotoUseCase: GetPhotoUseCase = mock()
+    private var getPhotoUseCase = GetPhotoUseCase(photoRepository)
     private var dataList = ArrayList<PhotoListModel>()
 
     @Before
     fun setUp() {
-        getPhotoUseCase = GetPhotoUseCase(photoRepository)
         dataList.add(PhotoListModel(1, 1, "test"))
     }
 

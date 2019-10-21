@@ -1,7 +1,7 @@
 package com.codemobiles.data.dataRepository
 
 import com.codemobiles.buyersguildmvp.database.MobileDAO
-import com.codemobiles.buyersguildmvp.model.MobileResponse
+import com.codemobiles.data.model.api.MobileResponse
 import com.codemobiles.data.mapper.MobileEntityDataMapper
 import com.codemobiles.data.model.db.MobileEntity
 import com.codemobiles.data.network.ApiInterface
